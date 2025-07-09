@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título y Descripción para SEO (Específicos de esta página) -->
+    <title>Nuestra Flotilla | OMEX TL</title>
+    <meta name="description" content="Conoce la flotilla de vehículos de OMEX TL: Urvan, Tornado Van, Attitude y Lobo. Unidades modernas y equipadas para cada necesidad de transporte.">
+    
+    <!-- Metas y Enlaces Comunes -->
+    <link rel="icon" href="assets/img/brand/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script>
+        // Configuración de Tailwind CSS (Común para todas las páginas)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#002131',
+                        'secondary': '#67c4d5',
+                        'light-gray': '#f7fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-800 flex flex-col min-h-screen">
+
+    <!-- ====== Header/Navegación (Reutilizable) ====== -->
+    <header class="bg-white shadow-md fixed w-full z-50 top-0">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" aria-label="Página de inicio de OMEX TL">
+                        <span class="text-3xl font-extrabold tracking-tight">
+                            <span class="text-primary">OMEX</span><span class="text-secondary">TL</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="nosotros.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Nosotros</a>
+                    <a href="servicios.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Servicios</a>
+                    <a href="flotilla.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Flotilla</a>
+                    <a href="cobertura.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Cobertura</a>
+                    <a href="contacto.html" class="nav-link bg-secondary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg">Contáctanos</a>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-secondary" aria-label="Abrir menú">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Inicio</a>
+            <a href="nosotros.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Nosotros</a>
+            <a href="servicios.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Servicios</a>
+            <a href="flotilla.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Flotilla</a>
+            <a href="cobertura.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Cobertura</a>
+            <a href="contacto.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Contacto</a>
+        </div>
+    </header>
+
+    <!-- ====== Contenido Principal (Específico de esta página) ====== -->
+    <main class="pt-16 flex-grow">
+        <div class="page-content-animation">
+            <section id="flotilla" class="py-20 bg-light-gray">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-extrabold text-primary">Nuestra Flotilla</h2>
+                        <p class="mt-4 text-lg text-gray-600">Unidades modernas y equipadas para cada tipo de necesidad.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="assets/img/flotilla/Urvan.jpg" alt="Camioneta Urvan de OMEX TL con branding" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">Urvan / Van Mediana</h3>
+                                <p class="text-gray-600">Ideal para paquetería de mayor volumen y entregas urbanas que requieren gran capacidad.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="assets/img/flotilla/Tornado.png" alt="Camioneta Chevrolet Tornado Van blanca con el logotipo de OMEX TL" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">Tornado Van</h3>
+                                <p class="text-gray-600">Perfecta para última milla y recolecciones. Gran rendimiento y versatilidad.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="assets/img/flotilla/Attitude.jpg" alt="Vehículo Attitude de OMEX TL con branding" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">Attitude / Sedán</h3>
+                                <p class="text-gray-600">Vehículo ágil para mensajería, documentos y paquetería pequeña de alto valor.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="assets/img/flotilla/Lobo.jpg" alt="Camioneta Lobo de OMEX TL con branding" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">Lobo / Pickup</h3>
+                                <p class="text-gray-600">Máxima capacidad y potencia para cargas pesadas o de gran tamaño.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-12 bg-primary text-white p-8 rounded-lg shadow-xl">
+                        <p class="text-2xl font-bold">
+                            Flotilla propia lista para operar en <span class="text-secondary">CDMX, Edomex, Puebla, Querétaro</span> y más.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- ====== Pie de Página (Reutilizable) ====== -->
+    <footer class="bg-primary text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-3xl font-extrabold mb-4 tracking-tight"><span class="text-white">OMEX</span><span class="text-secondary">TL</span></h3>
+                    <p class="text-gray-300">Tu socio estratégico en transporte y logística.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nosotros.html" class="text-gray-300 hover:text-white">Nosotros</a></li>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-white">Servicios</a></li>
+                        <li><a href="flotilla.html" class="text-gray-300 hover:text-white">Flotilla</a></li>
+                        <li><a href="cobertura.html" class="text-gray-300 hover:text-white">Cobertura</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto y Redes</h3>
+                    <ul class="space-y-2">
+                         <li><a href="mailto:contacto@omextl.com" class="text-gray-300 hover:text-white">contacto@omextl.com</a></li>
+                         <li><a href="tel:+525635942337" class="text-gray-300 hover:text-white">56 3594 2337</a></li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.linkedin.com/company/omex-tl/" aria-label="LinkedIn" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin text-2xl"></i></a>
+                        <a href="https://www.instagram.com/O.MEXTL/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="https://www.youtube.com/channel/UC3B2QJgrN48fNgPC4e0e_-Q" aria-label="YouTube" class="text-gray-300 hover:text-white"><i class="fab fa-youtube text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; <span id="year"></span> OMEX TL. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Enlace a nuestro archivo JavaScript principal -->
+    <script src="assets/js/main.js"></script>
+    <!-- Elfsight AI Chatbot -->
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0" data-elfsight-app-lazy></div>
+</body>
+</html>
+

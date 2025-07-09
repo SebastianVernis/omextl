@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título y Descripción para SEO (Específicos de esta página) -->
+    <title>Servicios de Logística y Transporte | OMEX TL</title>
+    <meta name="description" content="Descubre nuestra oferta integral de servicios logísticos: Transporte FTL y LTL, carga refrigerada, custodia de mercancía, seguros y más.">
+    
+    <!-- Metas y Enlaces Comunes -->
+    <link rel="icon" href="assets/img/brand/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script>
+        // Configuración de Tailwind CSS (Común para todas las páginas)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#002131',
+                        'secondary': '#67c4d5',
+                        'light-gray': '#f7fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-800 flex flex-col min-h-screen">
+
+    <!-- ====== Header/Navegación (Reutilizable) ====== -->
+    <header class="bg-white shadow-md fixed w-full z-50 top-0">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" aria-label="Página de inicio de OMEX TL">
+                        <span class="text-3xl font-extrabold tracking-tight">
+                            <span class="text-primary">OMEX</span><span class="text-secondary">TL</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="nosotros.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Nosotros</a>
+                    <a href="servicios.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Servicios</a>
+                    <a href="flotilla.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Flotilla</a>
+                    <a href="cobertura.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Cobertura</a>
+                    <a href="contacto.html" class="nav-link bg-secondary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg">Contáctanos</a>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-secondary" aria-label="Abrir menú">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Inicio</a>
+            <a href="nosotros.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Nosotros</a>
+            <a href="servicios.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Servicios</a>
+            <a href="flotilla.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Flotilla</a>
+            <a href="cobertura.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Cobertura</a>
+            <a href="contacto.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Contacto</a>
+        </div>
+    </header>
+
+    <!-- ====== Contenido Principal (Específico de esta página) ====== -->
+    <main class="pt-16 flex-grow">
+        <div class="page-content-animation">
+            <section id="servicios" class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-extrabold text-primary">Nuestra Oferta de Servicios Integrales</h2>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">A través de nuestra confiable red de aliados logísticos, ofrecemos un portafolio completo de soluciones para cada etapa de tu cadena de suministro. Haz clic en un servicio para conocer más.</p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="ftl-ltl">
+                            <i class="fas fa-trailer text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">FTL / LTL</h3>
+                            <p class="text-gray-600">Transporte de carga completa y consolidada para optimizar tus envíos.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="refrigerado">
+                            <i class="fas fa-snowflake text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Carga Refrigerada</h3>
+                            <p class="text-gray-600">Garantizamos la cadena de frío para tus productos más sensibles.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="camionetas">
+                            <i class="fas fa-truck-pickup text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Camionetas Dedicadas</h3>
+                            <p class="text-gray-600">Unidades de 1.5 a 3.5 toneladas para entregas directas y flexibles.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="custodia">
+                            <i class="fas fa-user-shield text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Custodia de Mercancía</h3>
+                            <p class="text-gray-600">Protección armada o sencilla para tus envíos de alto valor.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="seguros">
+                            <i class="fas fa-file-shield text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Seguros de Mercancía</h3>
+                            <p class="text-gray-600">Aseguramos tu inversión con pólizas para unidades, carga y descarga.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="maniobras">
+                            <i class="fas fa-people-carry text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Maniobras Especializadas</h3>
+                            <p class="text-gray-600">Servicio de carga, descarga y uso de maquinaria pesada.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="aduanas">
+                            <i class="fas fa-ship text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Logística de Aduanas</h3>
+                            <p class="text-gray-600">Gestión de ingreso en los principales puertos marítimos del país.</p>
+                        </div>
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg border-t-4 border-primary transition-all duration-300" data-service="monitoreo-gps">
+                            <i class="fas fa-satellite-dish text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Monitoreo GPS 24/7</h3>
+                            <p class="text-gray-600">Visibilidad y control total de tu carga en tiempo real.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer class="bg-primary text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-3xl font-extrabold mb-4 tracking-tight"><span class="text-white">OMEX</span><span class="text-secondary">TL</span></h3>
+                    <p class="text-gray-300">Tu socio estratégico en transporte y logística.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nosotros.html" class="text-gray-300 hover:text-white">Nosotros</a></li>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-white">Servicios</a></li>
+                        <li><a href="flotilla.html" class="text-gray-300 hover:text-white">Flotilla</a></li>
+                        <li><a href="cobertura.html" class="text-gray-300 hover:text-white">Cobertura</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto y Redes</h3>
+                    <ul class="space-y-2">
+                         <li><a href="mailto:contacto@omextl.com" class="text-gray-300 hover:text-white">contacto@omextl.com</a></li>
+                         <li><a href="tel:+525635942337" class="text-gray-300 hover:text-white">56 3594 2337</a></li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.linkedin.com/company/omex-tl/" aria-label="LinkedIn" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin text-2xl"></i></a>
+                        <a href="https://www.instagram.com/O.MEXTL/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="https://www.youtube.com/channel/UC3B2QJgrN48fNgPC4e0e_-Q" aria-label="YouTube" class="text-gray-300 hover:text-white"><i class="fab fa-youtube text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; <span id="year"></span> OMEX TL. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Detalles de Servicio -->
+    <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-container bg-white w-full max-w-2xl rounded-lg shadow-xl p-8 transform transition-transform duration-300 scale-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-2xl font-bold text-primary"></h3>
+                <button id="close-modal-button" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div id="modal-description" class="text-gray-700 space-y-4"></div>
+        </div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Lógica del Modal de Servicios (Específica de esta página)
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceModal = document.getElementById('service-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            
+            const serviceDetails = {
+                'ftl-ltl': { title: 'FTL (Full Truckload) y LTL (Less Than Truckload)', description: `<p>Nos adaptamos al tamaño de tu necesidad. Ofrecemos servicios de <strong>Carga Completa (FTL)</strong> y <strong>Carga Consolidada (LTL)</strong> en caja seca.</p><p>Si necesitas un vehículo completo, FTL garantiza exclusividad y rapidez. Si tus envíos son más pequeños, LTL te permite compartir espacio y reducir costos significativamente.</p>` },
+                'refrigerado': { title: 'Transporte de Carga Refrigerada', description: `<p>Garantizamos la cadena de frío para tus productos. Nuestro servicio de <strong>transporte refrigerado</strong> es ideal para mercancías perecederas o que requieren un control estricto de temperatura durante todo el trayecto, asegurando su calidad y frescura hasta el destino final.</p>` },
+                'camionetas': { title: 'Transporte en Camionetas', description: `<p>Para entregas directas, urgentes o de menor volumen, ofrecemos una flota de <strong>camionetas de 1.5 a 3.5 toneladas</strong>. Esta solución flexible es perfecta para la distribución urbana, última milla y para clientes que requieren un servicio dedicado y ágil.</p>` },
+                'custodia': { title: 'Custodia de Mercancía', description: `<p>La seguridad de tu carga es nuestra máxima prioridad. Ofrecemos protección especializada con opciones de <strong>custodia armada o sencilla a nivel nacional</strong>. Nuestro personal capacitado y los protocolos de seguridad garantizan la integridad de tu mercancía de alto valor.</p>` },
+                'seguros': { title: 'Seguros de Mercancía', description: `<p>Protege tu inversión ante cualquier imprevisto. Gestionamos <strong>seguros de mercancía</strong> con cobertura amplia para tus <strong>unidades, carga y descarga</strong>, dándote la tranquilidad que necesitas durante todo el trayecto de tu operación logística.</p>` },
+                'maniobras': { title: 'Maniobras Especializadas', description: `<p>Facilitamos tu operación con nuestro servicio de <strong>maniobras de carga y descarga</strong>, incluyendo el uso de <strong>maquinaria pesada</strong> si es necesario. Coordinamos todo el proceso para que tu mercancía se maneje de forma segura y eficiente.</p><p class="mt-2 text-sm text-gray-500"><em>Nota: Este servicio se solicita con antelación y está sujeto a disponibilidad.</em></p>` },
+                'aduanas': { title: 'Logística de Aduanas', description: `<p>Simplificamos tus operaciones de comercio exterior. Gestionamos el <strong>ingreso a las principales aduanas marítimas</strong> del país, asegurando que tu carga cumpla con todos los requisitos para un despacho ágil y sin contratiempos.</p><p>Operamos en: <strong>Veracruz, Manzanillo y Lázaro Cárdenas.</strong></p>` },
+                'monitoreo-gps': { title: 'Monitoreo GPS 24/7', description: `<p>La tecnología es nuestro gran aliado. Todas nuestras unidades están equipadas con sistemas de <strong>Monitoreo GPS 24/7</strong>, ofreciéndote visibilidad y control total sobre tu mercancía en todo momento, además de funciones de seguridad avanzadas como paro de motor.</p>` }
+            };
+
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const serviceId = card.dataset.service;
+                    const details = serviceDetails[serviceId];
+                    if (details) {
+                        modalTitle.textContent = details.title;
+                        modalDescription.innerHTML = details.description;
+                        serviceModal.classList.remove('hidden');
+                        setTimeout(() => {
+                           serviceModal.querySelector('.modal-container').classList.remove('scale-95');
+                           serviceModal.querySelector('.modal-container').classList.add('scale-100');
+                        }, 50);
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                const modalContainer = serviceModal.querySelector('.modal-container');
+                modalContainer.classList.remove('scale-100');
+                modalContainer.classList.add('scale-95');
+                setTimeout(() => serviceModal.classList.add('hidden'), 300);
+            };
+
+            closeModalButton.addEventListener('click', closeModal);
+            serviceModal.addEventListener('click', (e) => {
+                if (e.target === serviceModal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+    <!-- Elfsight AI Chatbot -->
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0" data-elfsight-app-lazy></div>
+</body>
+</html>
+

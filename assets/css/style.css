@@ -1,0 +1,120 @@
+/* ======================================================================= */
+/* Hoja de Estilos Personalizada para OMEX TL                              */
+/* ======================================================================= */
+
+/* --- Animaciones de Entrada --- */
+
+/* Animación para el contenido principal de cada página */
+@keyframes pageFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-content-animation {
+    animation: pageFadeInUp 1.2s ease-out forwards;
+}
+
+/* Animación para la sección Hero (página de inicio) */
+@keyframes heroFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Nuevas animaciones para los botones y elementos de scroll */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-title {
+    animation: heroFadeInUp 1s ease-out 0.3s both;
+}
+
+.hero-subtitle {
+    animation: heroFadeInUp 1s ease-out 0.6s both;
+}
+
+.hero-button-left {
+    animation: slideInFromLeft 1s ease-out 0.9s both;
+}
+
+.hero-button-right {
+    animation: slideInFromRight 1s ease-out 0.9s both;
+}
+
+/* Clases para animaciones al hacer scroll */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate-on-scroll.from-left {
+    transform: translateX(-50px);
+}
+
+.animate-on-scroll.from-right {
+    transform: translateX(50px);
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* --- Estilos Generales --- */
+
+.active-link {
+    color: #67c4d5 !important;
+    font-weight: 700;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.bg-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/sections/hero-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+

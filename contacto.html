@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título y Descripción para SEO (Específicos de esta página) -->
+    <title>Contacto | OMEX TL</title>
+    <meta name="description" content="Contacta a OMEX TL para cotizar tus envíos o resolver tus dudas. Encuentra nuestro teléfono, correo y dirección en Polanco, CDMX.">
+    
+    <!-- Metas y Enlaces Comunes -->
+    <link rel="icon" href="assets/img/brand/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script>
+        // Configuración de Tailwind CSS (Común para todas las páginas)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#002131',
+                        'secondary': '#67c4d5',
+                        'light-gray': '#f7fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-800 flex flex-col min-h-screen">
+
+    <!-- ====== Header/Navegación (Reutilizable) ====== -->
+    <header class="bg-white shadow-md fixed w-full z-50 top-0">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" aria-label="Página de inicio de OMEX TL">
+                        <span class="text-3xl font-extrabold tracking-tight">
+                            <span class="text-primary">OMEX</span><span class="text-secondary">TL</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="nosotros.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Nosotros</a>
+                    <a href="servicios.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Servicios</a>
+                    <a href="flotilla.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Flotilla</a>
+                    <a href="cobertura.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Cobertura</a>
+                    <a href="contacto.html" class="nav-link bg-secondary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg">Contáctanos</a>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button text-gray-700 hover:text-secondary" aria-label="Abrir menú">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Inicio</a>
+            <a href="nosotros.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Nosotros</a>
+            <a href="servicios.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Servicios</a>
+            <a href="flotilla.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Flotilla</a>
+            <a href="cobertura.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Cobertura</a>
+            <a href="contacto.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Contacto</a>
+        </div>
+    </header>
+
+    <!-- ====== Contenido Principal (Específico de esta página) ====== -->
+    <main class="pt-16 flex-grow">
+        <div class="page-content-animation">
+            <section id="contacto" class="py-20 bg-light-gray">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-extrabold text-primary">¿Listo para empezar?</h2>
+                        <p class="mt-4 text-lg text-gray-600">Ponte en contacto con nosotros. Nuestro equipo está listo para ayudarte.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- Formulario de Contacto -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary mb-6">Envíanos un Mensaje</h3>
+                            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                                <!-- Llave de acceso para Web3Forms -->
+                                <input type="hidden" name="access_key" value="5ccb6b9b-d96d-4509-837e-a1932ee6bc8b">
+                                
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-gray-700 font-medium mb-2">¿Cómo podemos ayudarte?</label>
+                                    <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 text-lg">
+                                    Enviar Mensaje
+                                </button>
+                            </form>
+                        </div>
+                        <!-- Información de Contacto y Mapa -->
+                        <div class="space-y-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-6">Información de Contacto</h3>
+                                <div class="bg-white p-6 rounded-lg shadow-lg">
+                                    <div class="space-y-4">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-envelope text-secondary w-6 text-center mr-4"></i>
+                                            <a href="mailto:contacto@omextl.com" class="text-gray-600 hover:text-primary">contacto@omextl.com</a>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-phone text-secondary w-6 text-center mr-4"></i>
+                                            <a href="tel:+525635942337" class="text-gray-600 hover:text-primary">56 3594 2337</a>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <i class="fas fa-map-marker-alt text-secondary w-6 text-center mr-4 mt-1"></i>
+                                            <div>
+                                                <p class="font-medium">Ubicación</p>
+                                                <p class="text-gray-600">Av. Homero 229, Piso 1, Int. 104-A, Polanco V Secc, Miguel Hidalgo, CDMX, 11560</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-80 bg-gray-300 rounded-lg shadow-lg overflow-hidden">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.49333989269!2d-99.1880998256568!3d19.434199940173276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8ac39218885%3A0x866ab323f628369e!2sHomero%20229%2C%20Polanco%2C%20Polanco%20V%20Secc%2C%20Miguel%20Hidalgo%2C%2011560%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1720221045952!5m2!1ses!2smx"
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- ====== Pie de Página (Reutilizable) ====== -->
+    <footer class="bg-primary text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-3xl font-extrabold mb-4 tracking-tight"><span class="text-white">OMEX</span><span class="text-secondary">TL</span></h3>
+                    <p class="text-gray-300">Tu socio estratégico en transporte y logística.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="nosotros.html" class="text-gray-300 hover:text-white">Nosotros</a></li>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-white">Servicios</a></li>
+                        <li><a href="flotilla.html" class="text-gray-300 hover:text-white">Flotilla</a></li>
+                        <li><a href="cobertura.html" class="text-gray-300 hover:text-white">Cobertura</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto y Redes</h3>
+                    <ul class="space-y-2">
+                         <li><a href="mailto:contacto@omextl.com" class="text-gray-300 hover:text-white">contacto@omextl.com</a></li>
+                         <li><a href="tel:+525635942337" class="text-gray-300 hover:text-white">56 3594 2337</a></li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.linkedin.com/company/omex-tl/" aria-label="LinkedIn" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin text-2xl"></i></a>
+                        <a href="https://www.instagram.com/O.MEXTL/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-300 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="https://www.youtube.com/channel/UC3B2QJgrN48fNgPC4e0e_-Q" aria-label="YouTube" class="text-gray-300 hover:text-white"><i class="fab fa-youtube text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; <span id="year"></span> OMEX TL. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Enlace a nuestro archivo JavaScript principal -->
+    <script src="assets/js/main.js"></script>
+    <!-- Elfsight AI Chatbot -->
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <div class="elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0" data-elfsight-app-lazy></div>
+</body>
+</html>
+
