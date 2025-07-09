@@ -118,3 +118,10 @@ main {
     background-repeat: no-repeat;
 }
 
+/* --- Chatbot Customization --- */
+@media (max-width: 768px) {
+    .elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0 {
+        bottom: 70px !important;
+        right: 10px !important;
+    }
+}
