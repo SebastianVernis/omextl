@@ -2,6 +2,37 @@
 /* Hoja de Estilos Personalizada para OMEX TL                              */
 /* ======================================================================= */
 
+/* --- Estilos Generales --- */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+.site-wrapper {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.bg-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/sections/hero-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.active-link {
+    color: #67c4d5 !important;
+    font-weight: 700;
+}
+
 /* --- Animaciones de Entrada --- */
 
 /* Animación para el contenido principal de cada página */
@@ -32,7 +63,6 @@
     }
 }
 
-/* Nuevas animaciones para los botones y elementos de scroll */
 @keyframes slideInFromLeft {
     from {
         opacity: 0;
@@ -90,39 +120,3 @@
     transform: translateX(0);
 }
 
-
-/* --- Estilos Generales --- */
-
-.active-link {
-    color: #67c4d5 !important;
-    font-weight: 700;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
-    color: #1f2937;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-}
-
-main {
-    flex-grow: 1;
-}
-
-.bg-hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/sections/hero-background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* --- Chatbot Customization --- */
-@media (max-width: 768px) {
-    .elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0 {
-        bottom: 70px !important;
-        right: 10px !important;
-    }
-}
