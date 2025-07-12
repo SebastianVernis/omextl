@@ -73,25 +73,27 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                        <!-- Ejemplo de Embed de YouTube Short -->
+                        <!-- Video de YouTube Responsivo -->
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll from-left">
                             <div class="p-4 text-center font-bold text-primary border-b">Video de YouTube</div>
-                            <!-- Para obtener este código: Ve a tu Short en YouTube, clic en "Compartir", luego en "Insertar" y copia el código del iframe. -->
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/-6seQHX6VtM?si=oCFL_oCcE1WXWLZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="responsive-iframe-container">
+                                <iframe src="https://www.youtube.com/embed/-6seQHX6VtM?si=oCFL_oCcE1WXWLZI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
                         </div>
 
-                        <!-- Ejemplo de Embed de Instagram Reel/Post -->
+                        <!-- Publicación de Instagram -->
                         <div class="bg-white rounded-lg shadow-lg p-4 animate-on-scroll from-left" style="transition-delay: 200ms;">
-                             <div class="p-4 text-center font-bold text-primary border-b mb-4">Publicación de Instagram</div>
-                            <!-- Para obtener este código: Ve a tu post en Instagram, clic en los tres puntos (...), luego en "Insertar" y copia el código del blockquote. -->
-                            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C..." data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                            <div class="p-4 text-center font-bold text-primary border-b mb-4">Publicación de Instagram</div>
+                            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C..." data-instgrm-version="14"></blockquote>
+                            <script async src="//www.instagram.com/embed.js"></script>
                         </div>
 
-                        <!-- Ejemplo de Embed de LinkedIn Post -->
+                        <!-- Publicación de LinkedIn Responsiva -->
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll from-left" style="transition-delay: 400ms;">
                             <div class="p-4 text-center font-bold text-primary border-b">Publicación de LinkedIn</div>
-                           <!-- Para obtener este código: Ve a tu post en LinkedIn, clic en los tres puntos (...), luego en "Insertar esta publicación" y copia el código del iframe. -->
-                           <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:ID_DE_LA_PUBLICACION" height="470" width="100%" frameborder="0" allowfullscreen="" title="Publicación insertada"></iframe>
+                            <div class="responsive-iframe-container" style="padding-top: 150%;"> <!-- Ajusta el padding-top si el ratio no es 16:9 -->
+                                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:ID_DE_LA_PUBLICACION" allowfullscreen title="Publicación insertada"></iframe>
+                            </div>
                         </div>
 
                     </div>
