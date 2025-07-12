@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Multimedia | OMEX TL</title>
+    <meta name="description" content="Explora la operación de OMEX TL a través de nuestra galería de videos e imágenes. Conoce nuestra flotilla, servicios y el equipo que hace posible cada entrega.">
+    <link rel="icon" href="assets/img/brand/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'primary': '#002131', 'secondary': '#67c4d5', 'light-gray': '#f7fafc' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-800 flex flex-col min-h-screen">
+
+<!-- ====== Header/Navegación (Reutilizable y Actualizado) ====== -->
+<header class="bg-white shadow-md fixed w-full z-50 top-0">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex-shrink-0">
+                <a href="index.html" aria-label="Página de inicio de OMEX TL">
+                    <span class="text-3xl font-extrabold tracking-tight">
+                        <span class="text-primary">OMEX</span><span class="text-secondary">TL</span>
+                    </span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="nosotros.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Nosotros</a>
+                <a href="servicios.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Servicios</a>
+                <a href="flotilla.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Flotilla</a>
+                <a href="cobertura.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Cobertura</a>
+                <a href="blog.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Blog</a>
+                <a href="galeria.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Galería</a>
+                <a href="contacto.html" class="nav-link bg-secondary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg">Contáctanos</a>
+            </div>
+            <div class="md:hidden">
+                <button type="button" class="mobile-menu-button text-gray-700 hover:text-secondary" aria-label="Abrir menú">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+        <a href="index.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Inicio</a>
+        <a href="nosotros.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Nosotros</a>
+        <a href="servicios.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Servicios</a>
+        <a href="flotilla.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Flotilla</a>
+        <a href="cobertura.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Cobertura</a>
+        <a href="blog.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Blog</a>
+        <a href="galeria.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Galería</a>
+        <a href="contacto.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Contacto</a>
+    </div>
+</header>
+
+    <main class="pt-16 flex-grow">
+        <div class="page-content-animation">
+            <section id="galeria" class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl font-extrabold text-primary">Galería Multimedia</h1>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Un vistazo a nuestra operación, nuestra flota y nuestro compromiso en acción. Síguenos en nuestras redes para no perderte nada.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                        <!-- Ejemplo de Embed de YouTube Short -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll from-left">
+                            <div class="p-4 text-center font-bold text-primary border-b">Video de YouTube</div>
+                            <!-- Para obtener este código: Ve a tu Short en YouTube, clic en "Compartir", luego en "Insertar" y copia el código del iframe. -->
+                            <iframe class="w-full h-96" src="https://www.youtube.com/embed/ID_DEL_VIDEO_SHORT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <!-- Ejemplo de Embed de Instagram Reel/Post -->
+                        <div class="bg-white rounded-lg shadow-lg p-4 animate-on-scroll from-left" style="transition-delay: 200ms;">
+                             <div class="p-4 text-center font-bold text-primary border-b mb-4">Publicación de Instagram</div>
+                            <!-- Para obtener este código: Ve a tu post en Instagram, clic en los tres puntos (...), luego en "Insertar" y copia el código del blockquote. -->
+                            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/C..." data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                        </div>
+
+                        <!-- Ejemplo de Embed de LinkedIn Post -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-on-scroll from-left" style="transition-delay: 400ms;">
+                            <div class="p-4 text-center font-bold text-primary border-b">Publicación de LinkedIn</div>
+                           <!-- Para obtener este código: Ve a tu post en LinkedIn, clic en los tres puntos (...), luego en "Insertar esta publicación" y copia el código del iframe. -->
+                           <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:ID_DE_LA_PUBLICACION" height="470" width="100%" frameborder="0" allowfullscreen="" title="Publicación insertada"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white" id="footer-placeholder">
+        <!-- El footer se cargará con JS -->
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

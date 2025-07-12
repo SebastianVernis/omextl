@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Logística y Transporte | OMEX TL</title>
+    <meta name="description" content="Explora nuestro blog para encontrar las últimas tendencias, consejos y análisis sobre el sector de la logística y el transporte en México.">
+    <link rel="icon" href="assets/img/brand/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'primary': '#002131', 'secondary': '#67c4d5', 'light-gray': '#f7fafc' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-800 flex flex-col min-h-screen">
+
+<!-- ====== Header/Navegación (Reutilizable y Actualizado) ====== -->
+<header class="bg-white shadow-md fixed w-full z-50 top-0">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex-shrink-0">
+                <a href="index.html" aria-label="Página de inicio de OMEX TL">
+                    <span class="text-3xl font-extrabold tracking-tight">
+                        <span class="text-primary">OMEX</span><span class="text-secondary">TL</span>
+                    </span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="nosotros.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Nosotros</a>
+                <a href="servicios.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Servicios</a>
+                <a href="flotilla.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Flotilla</a>
+                <a href="cobertura.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Cobertura</a>
+                <a href="blog.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Blog</a>
+                <a href="galeria.html" class="nav-link text-gray-600 hover:text-secondary font-medium">Galería</a>
+                <a href="contacto.html" class="nav-link bg-secondary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-lg">Contáctanos</a>
+            </div>
+            <div class="md:hidden">
+                <button type="button" class="mobile-menu-button text-gray-700 hover:text-secondary" aria-label="Abrir menú">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+        <a href="index.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Inicio</a>
+        <a href="nosotros.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Nosotros</a>
+        <a href="servicios.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Servicios</a>
+        <a href="flotilla.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Flotilla</a>
+        <a href="cobertura.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Cobertura</a>
+        <a href="blog.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Blog</a>
+        <a href="galeria.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Galería</a>
+        <a href="contacto.html" class="block text-gray-700 hover:bg-gray-100 px-4 py-3 font-medium">Contacto</a>
+    </div>
+</header>
+
+    <main class="pt-16 flex-grow">
+        <div class="page-content-animation">
+            <section id="blog-header" class="py-20 bg-light-gray">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-4xl font-extrabold text-primary">Blog de Logística OMEX TL</h1>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Tu fuente de conocimiento sobre las últimas tendencias, consejos y análisis del sector del transporte y la cadena de suministro en México.</p>
+                </div>
+            </section>
+
+            <section id="blog-posts" class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300 animate-on-scroll from-left">
+                            <a href="articulo-1.html"><img src="assets/img/blog/tendencia-2024.jpeg" alt="Tendencias en Logística" class="w-full h-56 object-cover"></a>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h2 class="text-xl font-bold text-primary mb-2"><a href="articulo-1.html" class="hover:text-secondary">Las 5 Claves para una Estrategia de Última Milla Exitosa</a></h2>
+                                <p class="text-gray-600 flex-grow">En el competitivo mundo del e-commerce, la última milla no es solo una entrega, es la experiencia final de tu cliente. Descubre cómo optimizarla.</p>
+                                <a href="articulo-1.html" class="text-secondary font-bold mt-4 inline-block">Leer más →</a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300 animate-on-scroll from-left" style="transition-delay: 200ms;">
+                            <a href="articulo-2.html"><img src="assets/img/blog/custodia.jpeg" alt="Custodia de mercancía" class="w-full h-56 object-cover"></a>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h2 class="text-xl font-bold text-primary mb-2"><a href="articulo-2.html" class="hover:text-secondary">Custodia Armada vs. Sencilla: ¿Cuál es la ideal para tu carga?</a></h2>
+                                <p class="text-gray-600 flex-grow">La seguridad de tu mercancía no es negociable. Te ayudamos a entender las diferencias clave y a elegir la protección adecuada para tu tipo de envío.</p>
+                                <a href="articulo-2.html" class="text-secondary font-bold mt-4 inline-block">Leer más →</a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300 animate-on-scroll from-left" style="transition-delay: 400ms;">
+                             <a href="articulo-3.html"><img src="assets/img/blog/logistica-sostenible.jpeg" alt="Logística sostenible" class="w-full h-56 object-cover"></a>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h2 class="text-xl font-bold text-primary mb-2"><a href="articulo-3.html" class="hover:text-secondary">El Futuro del Transporte: 3 Prácticas Sostenibles</a></h2>
+                                <p class="text-gray-600 flex-grow">La logística verde no es solo una tendencia, es una necesidad. Descubre 3 prácticas que tu empresa puede adoptar hoy para reducir costos y su huella de carbono.</p>
+                                <a href="articulo-3.html" class="text-secondary font-bold mt-4 inline-block">Leer más →</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white" id="footer-placeholder"></footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
