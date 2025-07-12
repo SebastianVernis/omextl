@@ -127,7 +127,14 @@ main {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.ratio-16-9 {
+    padding-top: 56.25%;
+}
+
+.ratio-5-4 {
+    padding-top: 125%;
 }
 
 .responsive-iframe-container iframe {
@@ -144,4 +151,11 @@ main {
     margin: 1px auto !important; /* Centrar y anular margen por defecto */
     width: calc(100% - 2px) !important;
     min-width: unset !important; /* Anular el min-width */
+}
+
+/* Contenedor para redes sociales */
+.social-media-container {
+    max-width: 400px; /* Ancho máximo para Instagram y LinkedIn */
+    margin-left: auto;
+    margin-right: auto;
 }
