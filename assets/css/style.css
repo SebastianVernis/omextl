@@ -153,9 +153,4 @@ main {
     min-width: unset !important; /* Anular el min-width */
 }
 
-/* Contenedor para redes sociales */
-.social-media-container {
-    max-width: 400px; /* Ancho máximo para Instagram y LinkedIn */
-    margin-left: auto;
-    margin-right: auto;
-}
+/* Contenedor para redes sociales (eliminado) */
