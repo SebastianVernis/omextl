@@ -142,7 +142,7 @@
         // Añade el mensaje del usuario al historial para mantener el contexto
         chatHistory.push({ role: "user", parts: [{ text: message }] });
 
-        const apiKey = "; // Dejar en blanco, se gestiona automáticamente.
+        const apiKey = ""; // Dejar en blanco, se gestiona automáticamente.
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         const payload = {
