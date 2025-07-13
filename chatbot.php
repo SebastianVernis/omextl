@@ -44,8 +44,12 @@ if ($httpcode == 200) {
     header('Content-Type: application/json');
     echo $response;
 } else {
-    // Manejo de errores
-    http_response_code($httpcode);
+} else {
+    // Log actual error for debugging (not exposed to client)
+    error_log("Gemini API error: HTTP $httpcode - $response");
+    
+    // Return generic error to client
+    http_response_code(500);
     echo json_encode(['error' => 'Error en la comunicación con la API de Gemini']);
 }
 ?>
