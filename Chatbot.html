@@ -115,7 +115,7 @@ fetch('prompt.txt')
        */
       async function getBotResponse(message) {
     // Verificar si hay API key
-    const apiKey = "AIzaSyCUHC77APrs0ndHZ3jZZJgpWt8nV75rxFI";
+    const apiKey = process.env.GEMINI_API_KEY || "";
     if (!apiKey || apiKey === "") {
         return "Lo siento, el chatbot no está configurado correctamente. Por favor contacta al administrador.";
     }
