@@ -4,34 +4,70 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- Lógica para el Menú Móvil ---
-    const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const mobileMenu = document.querySelector('.mobile-menu');
-
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    // --- Lógica para Resaltar el Enlace Activo en el Menú ---
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        if (linkPage === currentPage) {
-            if (!link.classList.contains('bg-secondary')) {
-                link.classList.add('active-link');
+    // --- Lógica para Cargar Header y Footer ---
+    const loadComponent = (id, url) => {
+        const element = document.getElementById(id);
+        if (element) {
+            let fetchUrl;
+            // Ajustar la ruta si estamos dentro del directorio /blog/
+            if (window.location.pathname.includes('/blog/')) {
+                fetchUrl = `../${url}`;
+            } else {
+                fetchUrl = url;
             }
-        }
-    });
 
-    // --- Lógica para Actualizar el Año en el Footer ---
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
+            fetch(fetchUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const component = doc.querySelector(id === 'header-placeholder' ? 'header' : 'footer');
+                    if (component) {
+                        element.outerHTML = component.outerHTML;
+                    }
+                })
+                .then(() => {
+                    // Volver a ejecutar las lógicas que dependen del contenido cargado
+                    initializeDynamicContent();
+                })
+                .catch(error => console.error(`Error loading ${id}:`, error));
+        }
+    };
+
+    loadComponent('header-placeholder', 'index.html');
+    loadComponent('footer-placeholder', 'index.html');
+
+    // --- Lógicas que dependen del contenido dinámico ---
+    const initializeDynamicContent = () => {
+        // --- Lógica para el Menú Móvil ---
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // --- Lógica para Resaltar el Enlace Activo en el Menú ---
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            if (linkPage === currentPage) {
+                if (!link.classList.contains('bg-secondary')) {
+                    link.classList.add('active-link');
+                }
+            }
+        });
+
+        // --- Lógica para Actualizar el Año en el Footer ---
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    };
 
     // --- Lógica para Animaciones al Hacer Scroll ---
     const scrollElements = document.querySelectorAll('.animate-on-scroll');
