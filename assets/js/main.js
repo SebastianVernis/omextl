@@ -2,18 +2,22 @@
 /* Script Principal para la Interactividad del Sitio OMEX TL               */
 /* =======================================================================*/
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // 1. Obtener los elementos del DOM
     const chatBubble = document.getElementById('chat-bubble');
     const chatbotContainer = document.getElementById('chatbot-container');
 
     // Función para alternar la visibilidad del chatbot
     const toggleChatbot = () => {
-        chatbotContainer.classList.toggle('visible');
+        if (chatbotContainer) {
+            chatbotContainer.classList.toggle('visible');
+        }
     };
 
     // 2. Añadir el evento de clic a la burbuja para abrir/cerrar
-    chatBubble.addEventListener('click', toggleChatbot);
+    if (chatBubble) {
+        chatBubble.addEventListener('click', toggleChatbot);
+    }
 
     // 3. Escuchar mensajes desde el iframe para cerrar el chatbot
     window.addEventListener('message', (event) => {
@@ -24,9 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleChatbot();
         }
     });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
 
     const initializeMobileMenu = () => {
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
@@ -135,26 +136,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ejecutar una vez al cargar la página por si los elementos ya son visibles
     handleScrollAnimation();
-    document.addEventListener('DOMContentLoaded', () => {
-    // 1. Obtener los elementos del DOM
-    const chatBubble = document.getElementById('chat-bubble');
-    const chatbotContainer = document.getElementById('chatbot-container');
-
-    // Función para alternar la visibilidad del chatbot
-    const toggleChatbot = () => {
-        chatbotContainer.classList.toggle('visible');
-    };
-
-    // 2. Añadir el evento de clic a la burbuja para abrir/cerrar
-    chatBubble.addEventListener('click', toggleChatbot);
-
-    // 3. Escuchar mensajes desde el iframe para cerrar el chatbot
-    window.addEventListener('message', (event) => {
-        // Por seguridad, podrías verificar el origen del mensaje con:
-        // if (event.origin !== 'https://tu-dominio.com') return;
-        
-        if (event.data === 'close-chatbot') {
-            toggleChatbot();
-        }
-    });
 });
