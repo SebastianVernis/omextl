@@ -43,7 +43,7 @@ class ChatbotManager {
 
     async loadPrompt() {
         try {
-            const response = await fetch('prompt.txt');
+            const response = await fetch('./prompt.txt');
             if (!response.ok) {
                 throw new Error(`Error al cargar el prompt: ${response.statusText}`);
             }
@@ -75,7 +75,7 @@ class ChatbotManager {
         };
 
         try {
-            const response = await fetch('chatbot.php', {
+            const response = await fetch('./chatbot.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
