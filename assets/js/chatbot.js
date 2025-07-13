@@ -9,12 +9,13 @@ closeBtn.addEventListener('click', () => {
     parent.postMessage('close-chatbot', '*');
 });
 
-const chatWindow = document.getElementById('chat-window');
 const userInput = document.getElementById('user-input');
+const chatWindow = document.getElementById('chat-window');
 const sendBtn = document.getElementById('send-btn');
 
 // Historial de la conversación
 let chatHistory = [];
+sendBtn.disabled = true;
 
 // Cargar prompt inicial desde un archivo externo
 fetch('prompt.txt')
@@ -22,8 +23,12 @@ fetch('prompt.txt')
     .then(promptText => {
         chatHistory.push({ role: "user", parts: [{ text: promptText }] });
         chatHistory.push({ role: "model", parts: [{ text: "¡Entendido! Seré un asistente de IA útil y amigable." }] });
+        sendBtn.disabled = false;
     })
-    .catch(error => console.error('Error al cargar el prompt:', error));
+    .catch(error => {
+        console.error('Error al cargar el prompt:', error)
+        sendBtn.disabled = false;
+    });
 
 async function getBotResponse(message) {
     chatHistory.push({ role: "user", parts: [{ text: message }] });
