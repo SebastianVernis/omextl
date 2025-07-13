@@ -213,3 +213,30 @@ main {
     height: 100%;
     border: none;
 }
+
+.chat-header {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+#close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.chat-window { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background-color: #f9f9f9;}
+.message { padding: 12px 18px; border-radius: 20px; max-width: 80%; line-height: 1.5; }
+.user-message { background-color: #e9e9eb; color: #000; align-self: flex-end; border-bottom-right-radius: 5px; }
+.bot-message { background-color: #f0f0f0; border: 1px solid #e0e0e0; align-self: flex-start; border-bottom-left-radius: 5px; }
+.chat-input { display: flex; padding: 15px; border-top: 1px solid #e0e0e0; background-color: #fff; }
+.chat-input input { flex-grow: 1; border: 1px solid #ccc; border-radius: 20px; padding: 12px 18px; font-size: 16px; }
+.chat-input button { background-color: #1a1a1a; color: white; border: none; border-radius: 50%; width: 45px; height: 45px; margin-left: 10px; cursor: pointer; font-size: 20px; }
