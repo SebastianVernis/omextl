@@ -197,10 +197,14 @@ class ChatbotManager {
             case 'askingPhone':
                 this.leadData.phone = message;
                 this.leadCollectionState = 'completed';
-                this.appendMessage('¡Excelente! He guardado tus datos. Ahora sí, ¿cómo puedo ayudarte?', 'bot');
+                this.appendMessage('¡Excelente! Ahora que tengo tus datos de contacto, ¿cómo puedo ayudarte?', 'bot');
 
-                // Optional: Send lead data to a server
-                // await this.sendLeadData();
+                // Send lead data to server
+                try {
+                    await this.sendLeadData();
+                } catch (error) {
+                    console.error('Error saving lead data:', error);
+                }
                 break;
         }
     }
