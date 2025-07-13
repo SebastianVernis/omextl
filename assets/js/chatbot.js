@@ -1,7 +1,3 @@
-// ======================================================================= 
-// Script del Chatbot Optimizado para OMEX TL
-// =======================================================================
-
 class ChatbotManager {
     constructor() {
         this.chatWindow = document.getElementById('chat-window');
@@ -20,15 +16,12 @@ class ChatbotManager {
     }
 
     setupEventListeners() {
-        // Botón de cerrar
         this.closeBtn?.addEventListener('click', () => {
             parent.postMessage('close-chatbot', '*');
         });
 
-        // Botón de enviar
         this.sendBtn?.addEventListener('click', () => this.handleUserInput());
 
-        // Enter en input
         this.userInput?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -36,7 +29,6 @@ class ChatbotManager {
             }
         });
 
-        // Auto-resize del textarea si se cambia a textarea
         this.userInput?.addEventListener('input', this.autoResize.bind(this));
     }
 
@@ -105,10 +97,7 @@ class ChatbotManager {
     appendMessage(message, sender) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-        
-        // Sanitizar el mensaje para prevenir XSS
         messageElement.textContent = message;
-        
         this.chatWindow.appendChild(messageElement);
         this.scrollToBottom();
     }
@@ -140,18 +129,12 @@ class ChatbotManager {
         this.isLoading = true;
         this.sendBtn.disabled = true;
         
-        // Mostrar mensaje del usuario
         this.appendMessage(message, 'user');
         this.userInput.value = '';
-        
-        // Mostrar indicador de escritura
         this.showTypingIndicator();
 
         try {
-            // Obtener respuesta del bot
             const botResponse = await this.getBotResponse(message);
-            
-            // Remover indicador y mostrar respuesta
             this.removeTypingIndicator();
             this.appendMessage(botResponse, 'bot');
         } catch (error) {
@@ -165,7 +148,6 @@ class ChatbotManager {
     }
 }
 
-// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     new ChatbotManager();
 });

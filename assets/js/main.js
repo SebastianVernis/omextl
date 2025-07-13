@@ -1,17 +1,10 @@
-/* ======================================================================= */
-/* Script Principal Optimizado para OMEX TL                                */
-/* ======================================================================= */
-
-// Configuración global optimizada
 const CONFIG = {
     ANIMATION_THRESHOLD: 1.25,
     DEBOUNCE_DELAY: 100,
     INTERSECTION_THRESHOLD: 0.1
 };
 
-// Utilidades optimizadas
 const Utils = {
-    // Debounce optimizado
     debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -24,7 +17,6 @@ const Utils = {
         };
     },
 
-    // Selector optimizado con cache
     $(selector, context = document) {
         return context.querySelector(selector);
     },
@@ -34,7 +26,6 @@ const Utils = {
     }
 };
 
-// Gestión del chatbot optimizada
 class ChatbotManager {
     constructor() {
         this.bubble = Utils.$('#chat-bubble');
@@ -47,7 +38,6 @@ class ChatbotManager {
             this.bubble.addEventListener('click', () => this.toggle());
         }
         
-        // Escuchar mensajes del iframe
         window.addEventListener('message', (event) => {
             if (event.data === 'close-chatbot') {
                 this.close();
@@ -68,7 +58,6 @@ class ChatbotManager {
     }
 }
 
-// Gestión de navegación optimizada
 class NavigationManager {
     constructor() {
         this.mobileButton = Utils.$('.mobile-menu-button');
@@ -83,7 +72,6 @@ class NavigationManager {
                 this.mobileMenu.classList.toggle('hidden');
             });
 
-            // Cerrar menú al hacer clic fuera
             document.addEventListener('click', (e) => {
                 if (!this.mobileMenu.contains(e.target) && !this.mobileButton.contains(e.target)) {
                     this.mobileMenu.classList.add('hidden');
@@ -105,7 +93,6 @@ class NavigationManager {
     }
 }
 
-// Gestión de animaciones de scroll optimizada con Intersection Observer
 class ScrollAnimationManager {
     constructor() {
         this.elements = Utils.$$('.animate-on-scroll');
@@ -115,14 +102,11 @@ class ScrollAnimationManager {
     init() {
         if (!this.elements.length) return;
 
-        // Usar Intersection Observer para mejor rendimiento
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // Opcional: dejar de observar el elemento una vez animado
-                        // observer.unobserve(entry.target);
                     }
                 });
             },
@@ -136,7 +120,6 @@ class ScrollAnimationManager {
     }
 }
 
-// Gestión de componentes dinámicos optimizada
 class ComponentLoader {
     constructor() {
         this.cache = new Map();
@@ -146,7 +129,6 @@ class ComponentLoader {
         const element = Utils.$(`#${id}`);
         if (!element) return false;
 
-        // Verificar cache
         if (this.cache.has(url)) {
             const cachedContent = this.cache.get(url);
             element.outerHTML = cachedContent;
@@ -154,7 +136,6 @@ class ComponentLoader {
         }
 
         try {
-            // Ajustar URL para rutas de blog
             const fetchUrl = window.location.pathname.includes('/blog/') ? `../${url}` : url;
             
             const response = await fetch(fetchUrl);
@@ -167,7 +148,7 @@ class ComponentLoader {
             
             if (component) {
                 const componentHTML = component.outerHTML;
-                this.cache.set(url, componentHTML); // Guardar en cache
+                this.cache.set(url, componentHTML);
                 element.outerHTML = componentHTML;
                 return true;
             }
@@ -187,7 +168,6 @@ class ComponentLoader {
     }
 }
 
-// Gestión del año en el footer
 class FooterManager {
     static updateYear() {
         const yearSpan = Utils.$('#year');
@@ -197,7 +177,6 @@ class FooterManager {
     }
 }
 
-// Gestión de lazy loading para imágenes
 class LazyLoadManager {
     constructor() {
         this.init();
@@ -221,7 +200,6 @@ class LazyLoadManager {
     }
 }
 
-// Inicialización principal optimizada
 class App {
     constructor() {
         this.chatbot = null;
@@ -232,50 +210,34 @@ class App {
     }
 
     async init() {
-        // Inicializar componentes principales
         this.chatbot = new ChatbotManager();
         this.navigation = new NavigationManager();
         this.scrollAnimation = new ScrollAnimationManager();
         this.lazyLoad = new LazyLoadManager();
 
-        // Verificar si necesitamos cargar componentes
         const needsComponents = Utils.$('#header-placeholder') || Utils.$('#footer-placeholder');
         
         if (needsComponents) {
             this.componentLoader = new ComponentLoader();
             await this.componentLoader.loadAllComponents();
-            
-            // Re-inicializar navegación después de cargar componentes
             this.navigation = new NavigationManager();
         }
 
-        // Configurar enlaces activos y año
         this.navigation.setActiveLinks();
         FooterManager.updateYear();
 
-        // Optimización: ejecutar animaciones iniciales solo si es necesario
         requestAnimationFrame(() => {
             this.scrollAnimation = new ScrollAnimationManager();
         });
     }
 }
 
-// Inicialización con mejor manejo de errores
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const app = new App();
         await app.init();
     } catch (error) {
         console.error('Error initializing app:', error);
-        // Fallback básico
         FooterManager.updateYear();
     }
 });
-
-// Optimización para navegadores modernos
-if ('serviceWorker' in navigator && 'production' === 'production') {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .catch(err => console.log('SW registration failed'));
-    });
-}

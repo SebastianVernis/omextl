@@ -1,8 +1,3 @@
-/* ======================================================================= */
-/* Hoja de Estilos Optimizada para OMEX TL                                 */
-/* ======================================================================= */
-
-/* --- Variables CSS para mejor mantenimiento --- */
 :root {
     --primary-color: #002131;
     --secondary-color: #67c4d5;
@@ -15,7 +10,6 @@
     --transition-medium: 0.3s ease-out;
 }
 
-/* --- Estilos Base Optimizados --- */
 * {
     box-sizing: border-box;
 }
@@ -40,14 +34,12 @@ main {
     flex-grow: 1;
 }
 
-/* --- Optimización de Imágenes y Videos --- */
 img, video {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* --- Hero Background Optimizado --- */
 .bg-hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/sections/hero-background.png');
     background-size: cover;
@@ -58,17 +50,15 @@ img, video {
 
 @media (max-width: 768px) {
     .bg-hero {
-        background-attachment: scroll; /* Mejor rendimiento en móviles */
+        background-attachment: scroll;
     }
 }
 
-/* --- Estados de Enlaces --- */
 .active-link {
     color: var(--secondary-color) !important;
     font-weight: 700;
 }
 
-/* --- Animaciones Optimizadas --- */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -102,7 +92,6 @@ img, video {
     }
 }
 
-/* --- Clases de Animación Reutilizables --- */
 .page-content-animation {
     animation: fadeInUp 1.2s ease-out forwards;
 }
@@ -123,7 +112,6 @@ img, video {
     animation: slideInRight 1s ease-out 0.9s both;
 }
 
-/* --- Animaciones de Scroll Optimizadas --- */
 .animate-on-scroll {
     opacity: 0;
     transition: opacity 1s ease-out, transform 1s ease-out;
@@ -143,7 +131,6 @@ img, video {
     transform: translateX(0);
 }
 
-/* --- Contenedores Responsivos Optimizados --- */
 .responsive-iframe-container {
     position: relative;
     overflow: hidden;
@@ -158,6 +145,10 @@ img, video {
     padding-top: 125%;
 }
 
+.ratio-9-16 {
+    padding-top: 177.78%;
+}
+
 .responsive-iframe-container iframe {
     position: absolute;
     top: 0;
@@ -167,14 +158,12 @@ img, video {
     border: 0;
 }
 
-/* --- Optimización de Instagram Embeds --- */
 .instagram-media {
     margin: 1px auto !important;
     width: calc(100% - 2px) !important;
     min-width: unset !important;
 }
 
-/* --- Chatbot Optimizado --- */
 .chat-bubble {
     position: fixed;
     bottom: 25px;
@@ -232,10 +221,10 @@ img, video {
     border: none;
 }
 
-/* --- Optimizaciones de Rendimiento --- */
 .service-card {
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
     will-change: transform;
+    cursor: pointer;
 }
 
 .service-card:hover {
@@ -243,7 +232,6 @@ img, video {
     box-shadow: var(--shadow-medium);
 }
 
-/* --- Media Queries Optimizadas --- */
 @media (max-width: 768px) {
     .chatbot-container {
         width: calc(100vw - 20px);
@@ -258,7 +246,6 @@ img, video {
     }
 }
 
-/* --- Optimización de Fuentes --- */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -269,7 +256,6 @@ img, video {
     }
 }
 
-/* --- Lazy Loading Support --- */
 img[loading="lazy"] {
     opacity: 0;
     transition: opacity 0.3s;
