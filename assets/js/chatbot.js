@@ -195,6 +195,10 @@ class ChatbotManager {
                 this.appendMessage('Gracias. Por último, ¿podrías darme tu número de teléfono?', 'bot');
                 break;
             case 'askingPhone':
+                if (!this.isValidPhone(message)) {
+                    this.appendMessage('Por favor, introduce un número de teléfono válido (10 dígitos).', 'bot');
+                    return;
+                }
                 this.leadData.phone = message;
                 this.leadCollectionState = 'completed';
                 this.appendMessage('¡Excelente! He guardado tus datos. Ahora sí, ¿cómo puedo ayudarte?', 'bot');
