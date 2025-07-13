@@ -147,11 +147,8 @@
                 </div>
             </div>
         </section>
-        
-    </main>
-    
-      <footer class="bg-primary text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      </main>
+        <footer class="bg-primary text-white auto py-12 px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-3xl font-extrabold mb-4 tracking-tight"><span class="text-white">OMEX</span><span class="text-secondary">TL</span></h3>
@@ -184,11 +181,13 @@
             </div>
         </div>
      </footer>
-      <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-    <div class="elfsight-app-d4efa9cc-625e-45bc-bff5-612736018cb0" data-elfsight-app-lazy></div>
-</div>
-    <script src="assets/js/main.js"></script>
-    <!-- Elfsight AI Chatbot -->
+      <div class="chat-bubble" id="chat-bubble">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+   </div>
+    <div class="chatbot-container" id="chatbot-container">
+      <iframe src="chatbot.html" title="Asistente Virtual de OMEXTL" class="chatbot-frame" id="chatbot-frame"></iframe>
+    </div>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
 

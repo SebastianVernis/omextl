@@ -153,4 +153,63 @@ main {
     min-width: unset !important; /* Anular el min-width */
 }
 
-/* Contenedor para redes sociales (eliminado) */
+
+/* --- Estilos para el Botón de Burbuja (Estilo OMEXTL) --- */
+.chat-bubble {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a; /* Negro o un gris muy oscuro */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: transform 0.2s ease-out, background-color 0.2s;
+}
+
+.chat-bubble:hover {
+    transform: scale(1.1);
+    background-color: #000; /* Negro más intenso al pasar el mouse */
+}
+
+/* --- Estilos para el Contenedor del Chatbot --- */
+.chatbot-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 370px; /* Un poco más ancho para un look moderno */
+    height: 80vh; /* Altura relativa para adaptarse mejor a distintas pantallas */
+    max-height: 600px;
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    z-index: 1000;
+    
+    /* Estado inicial: oculto */
+    transform: scale(0);
+    transform-origin: bottom right;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+}
+
+/* Clase para MOSTRAR el chatbot */
+.chatbot-container.visible {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Estilos para el Iframe --- */
+.chatbot-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
