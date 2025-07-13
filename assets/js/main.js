@@ -3,56 +3,21 @@
 /* ======================================================================= */
 
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Lógica para Cargar Header y Footer ---
-    const loadComponent = (id, url) => {
-        const element = document.getElementById(id);
-        if (element) {
-            let fetchUrl;
-            // Ajustar la ruta si estamos dentro del directorio /blog/
-            if (window.location.pathname.includes('/blog/')) {
-                fetchUrl = `../${url}`;
-            } else {
-                fetchUrl = url;
-            }
 
-            fetch(fetchUrl)
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const component = doc.querySelector(id === 'header-placeholder' ? 'header' : 'footer');
-                    if (component) {
-                        element.outerHTML = component.outerHTML;
-                    }
-                })
-                .then(() => {
-                    // Volver a ejecutar las lógicas que dependen del contenido cargado
-                    initializeDynamicContent();
-                })
-                .catch(error => console.error(`Error loading ${id}:`, error));
-        }
-    };
-
-    loadComponent('header-placeholder', 'index.html');
-    loadComponent('footer-placeholder', 'index.html');
-
-    // --- Lógicas que dependen del contenido dinámico ---
-    const initializeDynamicContent = () => {
-        // --- Lógica para el Menú Móvil ---
+    const initializeMobileMenu = () => {
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-
         if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
                 mobileMenu.classList.toggle('hidden');
             });
         }
+    };
 
-        // --- Lógica para Resaltar el Enlace Activo en el Menú ---
+    const initializeActiveNavLinks = () => {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const navLinks = document.querySelectorAll('.nav-link');
-
         navLinks.forEach(link => {
             const linkPage = link.getAttribute('href').split('/').pop();
             if (linkPage === currentPage) {
@@ -61,15 +26,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+    };
 
-        // --- Lógica para Actualizar el Año en el Footer ---
+    const initializeFooterYear = () => {
         const yearSpan = document.getElementById('year');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
     };
 
-    // --- Lógica para Animaciones al Hacer Scroll ---
+    const loadComponent = async (id, url) => {
+        const element = document.getElementById(id);
+        if (element) {
+            let fetchUrl = window.location.pathname.includes('/blog/') ? `../${url}` : url;
+            try {
+                const response = await fetch(fetchUrl);
+                const data = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const component = doc.querySelector(id === 'header-placeholder' ? 'header' : 'footer');
+                if (component) {
+                    element.outerHTML = component.outerHTML;
+                    return true;
+                }
+            } catch (error) {
+                console.error(`Error loading ${id}:`, error);
+            }
+        }
+        return false;
+    };
+
+    const loadAllComponents = async () => {
+        await Promise.all([
+            loadComponent('header-placeholder', 'index.html'),
+            loadComponent('footer-placeholder', 'index.html')
+        ]);
+
+        // Una vez cargados los componentes, inicializamos la funcionalidad
+        initializeMobileMenu();
+        initializeActiveNavLinks();
+        initializeFooterYear();
+    };
+
+    // Si estamos en la página principal, no necesitamos cargar, solo inicializar
+    if (document.querySelector('header') && !document.getElementById('header-placeholder')) {
+        initializeMobileMenu();
+        initializeActiveNavLinks();
+        initializeFooterYear();
+    } else {
+        loadAllComponents();
+    }
+
+    // --- Lógica para Animaciones al Hacer Scroll (independiente de la carga de componentes) ---
     const scrollElements = document.querySelectorAll('.animate-on-scroll');
 
     const elementInView = (el, dividend = 1) => {
