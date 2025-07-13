@@ -56,6 +56,14 @@ async function getBotResponse(message) {
         }
 
         const result = await response.json();
+        
+        // Validate API response structure
+        if (!result.candidates || !result.candidates[0] || 
+            !result.candidates[0].content || !result.candidates[0].content.parts ||
+            !result.candidates[0].content.parts[0] || !result.candidates[0].content.parts[0].text) {
+            throw new Error('Invalid API response structure');
+        }
+        
         const botMessage = result.candidates[0].content.parts[0].text;
         chatHistory.push({ role: "model", parts: [{ text: botMessage }] });
         return botMessage;
