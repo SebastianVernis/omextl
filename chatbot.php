@@ -6,6 +6,11 @@ if (!$apiKey) {
     echo json_encode(['error' => 'API key not configured']);
     exit;
 }
+if (!$apiKey) {
+    http_response_code(500);
+    echo json_encode(['error' => 'API key not configured']);
+    exit;
+}
 
 // Obtiene el historial de la conversación desde la solicitud POST
 $data = json_decode(file_get_contents('php://input'), true);
