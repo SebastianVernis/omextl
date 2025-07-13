@@ -1,6 +1,12 @@
 <?php
 $apiKey = getenv('GEMINI_API_KEY');
 
+if (!$apiKey) {
+    http_response_code(500);
+    echo json_encode(['error' => 'La clave de API no está configurada en el servidor.']);
+    exit;
+}
+
 $data = json_decode(file_get_contents('php://input'), true);
 $chatHistory = $data['history'];
 
