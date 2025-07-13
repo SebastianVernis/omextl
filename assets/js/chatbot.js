@@ -1,6 +1,15 @@
 // La lógica del chatbot (las respuestas y el envío de mensajes) se mantiene igual.
 // Ahora, la comunicación para cerrar se manejará desde el script principal.
+// Validate DOM elements exist
 const closeBtn = document.getElementById('close-btn');
+const userInput = document.getElementById('user-input');
+const chatWindow = document.getElementById('chat-window');
+const sendBtn = document.getElementById('send-btn');
+
+if (!closeBtn || !userInput || !chatWindow || !sendBtn) {
+    console.error('Required DOM elements not found');
+    return;
+}
 
 // Cuando se hace clic en el botón de cerrar, enviamos un mensaje a la página padre.
 closeBtn.addEventListener('click', () => {
@@ -8,10 +17,6 @@ closeBtn.addEventListener('click', () => {
     // "postMessage" es la forma segura de comunicar iframes con su página contenedora.
     parent.postMessage('close-chatbot', '*');
 });
-
-const userInput = document.getElementById('user-input');
-const chatWindow = document.getElementById('chat-window');
-const sendBtn = document.getElementById('send-btn');
 
 // Historial de la conversación
 let chatHistory = [];
