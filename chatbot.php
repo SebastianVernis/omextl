@@ -9,6 +9,11 @@ if (!$apiKey) {
 
 // Obtiene el historial de la conversación desde la solicitud POST
 $data = json_decode(file_get_contents('php://input'), true);
+if (!$data || !isset($data['history']) || !is_array($data['history'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid request format']);
+    exit;
+}
 $chatHistory = $data['history'];
 
 // URL de la API de Gemini
