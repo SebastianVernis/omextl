@@ -167,9 +167,12 @@ class ChatbotManager {
 
     async handleLeadCollection(message) {
         // A simple check to see if the user is asking a question instead of providing info.
-        if (message.includes('?') || message.toLowerCase().includes('que') || message.toLowerCase().includes('cual')) {
+        const questionPatterns = /^(qué|cuál|cómo|dónde|cuándo|por qué|quién)\s/i;
+        const isDirectQuestion = questionPatterns.test(message.trim()) || 
+                                (message.includes('?') && message.split(' ').length > 3);
+
+        if (isDirectQuestion) {
             this.appendMessage('Entiendo que tienes una pregunta. Para poder ayudarte mejor, por favor, primero completemos tus datos.', 'bot');
-            // Re-ask the current question
             this.reAskCurrentLeadQuestion();
             return;
         }
