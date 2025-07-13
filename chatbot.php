@@ -1,7 +1,7 @@
 <?php
 $apiKey = getenv('GEMINI_API_KEY');
 
-if (!$apiKey) {
+if (!$apiKey || trim($apiKey) === '') {
     http_response_code(500);
     echo json_encode(['error' => 'La clave de API no está configurada en el servidor.']);
     exit;
