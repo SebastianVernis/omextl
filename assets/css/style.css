@@ -1,13 +1,32 @@
 /* ======================================================================= */
-/* Hoja de Estilos Personalizada para OMEX TL                              */
+/* Hoja de Estilos Optimizada para OMEX TL                                 */
 /* ======================================================================= */
 
-/* --- Estilos Generales --- */
+/* --- Variables CSS para mejor mantenimiento --- */
+:root {
+    --primary-color: #002131;
+    --secondary-color: #67c4d5;
+    --light-gray: #f7fafc;
+    --text-gray: #1f2937;
+    --border-gray: #e0e0e0;
+    --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --transition-fast: 0.2s ease-out;
+    --transition-medium: 0.3s ease-out;
+}
+
+/* --- Estilos Base Optimizados --- */
+* {
+    box-sizing: border-box;
+}
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: #ffffff;
-    color: #1f2937;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
 .site-wrapper {
@@ -21,38 +40,36 @@ main {
     flex-grow: 1;
 }
 
+/* --- Optimización de Imágenes y Videos --- */
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Hero Background Optimizado --- */
 .bg-hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/sections/hero-background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+@media (max-width: 768px) {
+    .bg-hero {
+        background-attachment: scroll; /* Mejor rendimiento en móviles */
+    }
+}
+
+/* --- Estados de Enlaces --- */
 .active-link {
-    color: #67c4d5 !important;
+    color: var(--secondary-color) !important;
     font-weight: 700;
 }
 
-/* --- Animaciones de Entrada --- */
-
-/* Animación para el contenido principal de cada página */
-@keyframes pageFadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.page-content-animation {
-    animation: pageFadeInUp 1.2s ease-out forwards;
-}
-
-/* Animación para la sección Hero (página de inicio) */
-@keyframes heroFadeInUp {
+/* --- Animaciones Optimizadas --- */
+@keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -63,7 +80,7 @@ main {
     }
 }
 
-@keyframes slideInFromLeft {
+@keyframes slideInLeft {
     from {
         opacity: 0;
         transform: translateX(-50px);
@@ -74,7 +91,7 @@ main {
     }
 }
 
-@keyframes slideInFromRight {
+@keyframes slideInRight {
     from {
         opacity: 0;
         transform: translateX(50px);
@@ -85,26 +102,32 @@ main {
     }
 }
 
+/* --- Clases de Animación Reutilizables --- */
+.page-content-animation {
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
 .hero-title {
-    animation: heroFadeInUp 1s ease-out 0.3s both;
+    animation: fadeInUp 1s ease-out 0.3s both;
 }
 
 .hero-subtitle {
-    animation: heroFadeInUp 1s ease-out 0.6s both;
+    animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .hero-button-left {
-    animation: slideInFromLeft 1s ease-out 0.9s both;
+    animation: slideInLeft 1s ease-out 0.9s both;
 }
 
 .hero-button-right {
-    animation: slideInFromRight 1s ease-out 0.9s both;
+    animation: slideInRight 1s ease-out 0.9s both;
 }
 
-/* Clases para animaciones al hacer scroll */
+/* --- Animaciones de Scroll Optimizadas --- */
 .animate-on-scroll {
     opacity: 0;
     transition: opacity 1s ease-out, transform 1s ease-out;
+    will-change: opacity, transform;
 }
 
 .animate-on-scroll.from-left {
@@ -120,9 +143,7 @@ main {
     transform: translateX(0);
 }
 
-/* --- Estilos para la Galería --- */
-
-/* Contenedor para iframes responsivos */
+/* --- Contenedores Responsivos Optimizados --- */
 .responsive-iframe-container {
     position: relative;
     overflow: hidden;
@@ -146,70 +167,114 @@ main {
     border: 0;
 }
 
-/* Ajustes para el embed de Instagram */
+/* --- Optimización de Instagram Embeds --- */
 .instagram-media {
-    margin: 1px auto !important; /* Centrar y anular margen por defecto */
+    margin: 1px auto !important;
     width: calc(100% - 2px) !important;
-    min-width: unset !important; /* Anular el min-width */
+    min-width: unset !important;
 }
 
-
-/* --- Estilos para el Botón de Burbuja (Estilo OMEXTL) --- */
+/* --- Chatbot Optimizado --- */
 .chat-bubble {
     position: fixed;
     bottom: 25px;
     right: 25px;
     width: 60px;
     height: 60px;
-    background-color: #1a1a1a; /* Negro o un gris muy oscuro */
+    background-color: var(--primary-color);
     color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-light);
     z-index: 999;
-    transition: transform 0.2s ease-out, background-color 0.2s;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+    will-change: transform;
 }
 
 .chat-bubble:hover {
     transform: scale(1.1);
-    background-color: #000; /* Negro más intenso al pasar el mouse */
+    background-color: #000;
 }
 
-/* --- Estilos para el Contenedor del Chatbot --- */
 .chatbot-container {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 370px; /* Un poco más ancho para un look moderno */
-    height: 80vh; /* Altura relativa para adaptarse mejor a distintas pantallas */
+    width: 370px;
+    height: 80vh;
     max-height: 600px;
     background-color: #fff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-medium);
     border-radius: 15px;
     overflow: hidden;
     z-index: 1000;
-    
-    /* Estado inicial: oculto */
     transform: scale(0);
     transform-origin: bottom right;
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                opacity var(--transition-fast);
+    will-change: transform, opacity;
 }
 
-/* Clase para MOSTRAR el chatbot */
 .chatbot-container.visible {
     transform: scale(1);
     opacity: 1;
     visibility: visible;
 }
 
-/* --- Estilos para el Iframe --- */
 .chatbot-frame {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* --- Optimizaciones de Rendimiento --- */
+.service-card {
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    will-change: transform;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* --- Media Queries Optimizadas --- */
+@media (max-width: 768px) {
+    .chatbot-container {
+        width: calc(100vw - 20px);
+        right: 10px;
+        left: 10px;
+        bottom: 90px;
+    }
+    
+    .chat-bubble {
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+/* --- Optimización de Fuentes --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* --- Lazy Loading Support --- */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
 }

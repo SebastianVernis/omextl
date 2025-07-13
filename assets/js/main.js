@@ -1,139 +1,281 @@
 /* ======================================================================= */
-/* Script Principal para la Interactividad del Sitio OMEX TL               */
-/* =======================================================================*/
+/* Script Principal Optimizado para OMEX TL                                */
+/* ======================================================================= */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Obtener los elementos del DOM
-    const chatBubble = document.getElementById('chat-bubble');
-    const chatbotContainer = document.getElementById('chatbot-container');
+// Configuración global optimizada
+const CONFIG = {
+    ANIMATION_THRESHOLD: 1.25,
+    DEBOUNCE_DELAY: 100,
+    INTERSECTION_THRESHOLD: 0.1
+};
 
-    // Función para alternar la visibilidad del chatbot
-    const toggleChatbot = () => {
-        if (chatbotContainer) {
-            chatbotContainer.classList.toggle('visible');
-        }
-    };
+// Utilidades optimizadas
+const Utils = {
+    // Debounce optimizado
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
 
-    // 2. Añadir el evento de clic a la burbuja para abrir/cerrar
-    if (chatBubble) {
-        chatBubble.addEventListener('click', toggleChatbot);
+    // Selector optimizado con cache
+    $(selector, context = document) {
+        return context.querySelector(selector);
+    },
+
+    $$(selector, context = document) {
+        return context.querySelectorAll(selector);
+    }
+};
+
+// Gestión del chatbot optimizada
+class ChatbotManager {
+    constructor() {
+        this.bubble = Utils.$('#chat-bubble');
+        this.container = Utils.$('#chatbot-container');
+        this.init();
     }
 
-    // 3. Escuchar mensajes desde el iframe para cerrar el chatbot
-    window.addEventListener('message', (event) => {
-        // Por seguridad, podrías verificar el origen del mensaje con:
-        // if (event.origin !== 'https://tu-dominio.com') return;
+    init() {
+        if (this.bubble) {
+            this.bubble.addEventListener('click', () => this.toggle());
+        }
         
-        if (event.data === 'close-chatbot') {
-            toggleChatbot();
-        }
-    });
-
-    const initializeMobileMenu = () => {
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-    };
-
-    const initializeActiveNavLinks = () => {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            const linkPage = link.getAttribute('href').split('/').pop();
-            if (linkPage === currentPage) {
-                if (!link.classList.contains('bg-secondary')) {
-                    link.classList.add('active-link');
-                }
+        // Escuchar mensajes del iframe
+        window.addEventListener('message', (event) => {
+            if (event.data === 'close-chatbot') {
+                this.close();
             }
         });
-    };
+    }
 
-    const initializeFooterYear = () => {
-        const yearSpan = document.getElementById('year');
+    toggle() {
+        if (this.container) {
+            this.container.classList.toggle('visible');
+        }
+    }
+
+    close() {
+        if (this.container) {
+            this.container.classList.remove('visible');
+        }
+    }
+}
+
+// Gestión de navegación optimizada
+class NavigationManager {
+    constructor() {
+        this.mobileButton = Utils.$('.mobile-menu-button');
+        this.mobileMenu = Utils.$('.mobile-menu');
+        this.init();
+    }
+
+    init() {
+        if (this.mobileButton && this.mobileMenu) {
+            this.mobileButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.mobileMenu.classList.toggle('hidden');
+            });
+
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!this.mobileMenu.contains(e.target) && !this.mobileButton.contains(e.target)) {
+                    this.mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+    }
+
+    setActiveLinks() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = Utils.$$('.nav-link');
+        
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            if (linkPage === currentPage && !link.classList.contains('bg-secondary')) {
+                link.classList.add('active-link');
+            }
+        });
+    }
+}
+
+// Gestión de animaciones de scroll optimizada con Intersection Observer
+class ScrollAnimationManager {
+    constructor() {
+        this.elements = Utils.$$('.animate-on-scroll');
+        this.init();
+    }
+
+    init() {
+        if (!this.elements.length) return;
+
+        // Usar Intersection Observer para mejor rendimiento
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Opcional: dejar de observar el elemento una vez animado
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: CONFIG.INTERSECTION_THRESHOLD,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+        this.elements.forEach(el => observer.observe(el));
+    }
+}
+
+// Gestión de componentes dinámicos optimizada
+class ComponentLoader {
+    constructor() {
+        this.cache = new Map();
+    }
+
+    async loadComponent(id, url) {
+        const element = Utils.$(`#${id}`);
+        if (!element) return false;
+
+        // Verificar cache
+        if (this.cache.has(url)) {
+            const cachedContent = this.cache.get(url);
+            element.outerHTML = cachedContent;
+            return true;
+        }
+
+        try {
+            // Ajustar URL para rutas de blog
+            const fetchUrl = window.location.pathname.includes('/blog/') ? `../${url}` : url;
+            
+            const response = await fetch(fetchUrl);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            const component = doc.querySelector(id === 'header-placeholder' ? 'header' : 'footer');
+            
+            if (component) {
+                const componentHTML = component.outerHTML;
+                this.cache.set(url, componentHTML); // Guardar en cache
+                element.outerHTML = componentHTML;
+                return true;
+            }
+        } catch (error) {
+            console.error(`Error loading ${id}:`, error);
+        }
+        return false;
+    }
+
+    async loadAllComponents() {
+        const promises = [
+            this.loadComponent('header-placeholder', 'index.html'),
+            this.loadComponent('footer-placeholder', 'index.html')
+        ];
+        
+        await Promise.all(promises);
+    }
+}
+
+// Gestión del año en el footer
+class FooterManager {
+    static updateYear() {
+        const yearSpan = Utils.$('#year');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
-    };
+    }
+}
 
-    const loadComponent = async (id, url) => {
-        const element = document.getElementById(id);
-        if (element) {
-            let fetchUrl = window.location.pathname.includes('/blog/') ? `../${url}` : url;
-            try {
-                const response = await fetch(fetchUrl);
-                const data = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
-                const component = doc.querySelector(id === 'header-placeholder' ? 'header' : 'footer');
-                if (component) {
-                    element.outerHTML = component.outerHTML;
-                    return true;
-                }
-            } catch (error) {
-                console.error(`Error loading ${id}:`, error);
-            }
-        }
-        return false;
-    };
-
-    const loadAllComponents = async () => {
-        await Promise.all([
-            loadComponent('header-placeholder', 'index.html'),
-            loadComponent('footer-placeholder', 'index.html')
-        ]);
-        // Una vez cargados los componentes, inicializamos la funcionalidad
-        initializeMobileMenu();
-        initializeActiveNavLinks();
-        initializeFooterYear();
-    };
-
-    // Si estamos en la página principal, no necesitamos cargar, solo inicializar
-    if (document.querySelector('header') && !document.getElementById('header-placeholder')) {
-        initializeMobileMenu();
-        initializeActiveNavLinks();
-        initializeFooterYear();
-    } else {
-        loadAllComponents();
+// Gestión de lazy loading para imágenes
+class LazyLoadManager {
+    constructor() {
+        this.init();
     }
 
-    // --- Lógica para Animaciones al Hacer Scroll (independiente de la carga de componentes) ---
-    const scrollElements = document.querySelectorAll('.animate-on-scroll');
+    init() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
 
-    const elementInView = (el, dividend = 1) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return (
-            elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
-        );
-    };
+            Utils.$$('img[data-src]').forEach(img => imageObserver.observe(img));
+        }
+    }
+}
 
-    const displayScrollElement = (element) => {
-        element.classList.add('is-visible');
-    };
+// Inicialización principal optimizada
+class App {
+    constructor() {
+        this.chatbot = null;
+        this.navigation = null;
+        this.scrollAnimation = null;
+        this.componentLoader = null;
+        this.lazyLoad = null;
+    }
 
-    const hideScrollElement = (element) => {
-        element.classList.remove('is-visible');
-    };
+    async init() {
+        // Inicializar componentes principales
+        this.chatbot = new ChatbotManager();
+        this.navigation = new NavigationManager();
+        this.scrollAnimation = new ScrollAnimationManager();
+        this.lazyLoad = new LazyLoadManager();
 
-    const handleScrollAnimation = () => {
-        scrollElements.forEach((el) => {
-            if (elementInView(el, 1.25)) {
-                displayScrollElement(el);
-            } else {
-                // Opcional: descomentar la siguiente línea si quieres que la animación se repita al salir y volver a entrar
-                // hideScrollElement(el);
-            }
+        // Verificar si necesitamos cargar componentes
+        const needsComponents = Utils.$('#header-placeholder') || Utils.$('#footer-placeholder');
+        
+        if (needsComponents) {
+            this.componentLoader = new ComponentLoader();
+            await this.componentLoader.loadAllComponents();
+            
+            // Re-inicializar navegación después de cargar componentes
+            this.navigation = new NavigationManager();
+        }
+
+        // Configurar enlaces activos y año
+        this.navigation.setActiveLinks();
+        FooterManager.updateYear();
+
+        // Optimización: ejecutar animaciones iniciales solo si es necesario
+        requestAnimationFrame(() => {
+            this.scrollAnimation = new ScrollAnimationManager();
         });
-    };
+    }
+}
 
-    window.addEventListener('scroll', () => {
-        handleScrollAnimation();
-    });
-
-    // Ejecutar una vez al cargar la página por si los elementos ya son visibles
-    handleScrollAnimation();
+// Inicialización con mejor manejo de errores
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const app = new App();
+        await app.init();
+    } catch (error) {
+        console.error('Error initializing app:', error);
+        // Fallback básico
+        FooterManager.updateYear();
+    }
 });
+
+// Optimización para navegadores modernos
+if ('serviceWorker' in navigator && 'production' === 'production') {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .catch(err => console.log('SW registration failed'));
+    });
+}
