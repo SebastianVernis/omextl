@@ -22,7 +22,9 @@ class ChatbotManager {
             isChatActive: this.leadForm.style.display === 'none'
         };
         try {
-            sessionStorage.setItem('chatbotState', JSON.stringify(state));
+            if (typeof(Storage) !== "undefined" && sessionStorage) {
+                sessionStorage.setItem('chatbotState', JSON.stringify(state));
+            }
         } catch (error) {
             console.warn('Failed to save chatbot state:', error);
         }
