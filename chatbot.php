@@ -14,8 +14,17 @@ if (!$apiKey || trim($apiKey) === '') {
 }
 
 // Ya no hay datos de prueba, ahora lee la entrada real desde la petición web.
-$data = json_decode(file_get_contents('php://input'), true);
-$chatHistory = $data['history'];
+$raw_input = file_get_contents('php://input');
+error_log("Raw input: " . $raw_input);
+$data = json_decode($raw_input, true);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Error al decodificar JSON: ' . json_last_error_msg()]);
+    exit;
+}
+
+$chatHistory = $data['history'] ?? null;
 
 // Si no hay historial, no se puede procesar.
 if (empty($chatHistory)) {
