@@ -77,5 +77,47 @@
     <footer class="bg-primary text-white" id="footer-placeholder"></footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postsContainer = document.querySelector('#blog-posts .grid');
+            if (!postsContainer) return;
+
+            const articles = Array.from(postsContainer.children);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            articles.forEach(article => {
+                const link = article.querySelector('a[href*="blog/"]');
+                if (!link) {
+                    article.style.display = 'none';
+                    return;
+                }
+
+                const href = link.getAttribute('href');
+                const filename = href.split('/').pop();
+                const dateString = filename.match(/^(\d{2})(\d{2})(\d{4})/);
+
+                if (dateString) {
+                    const day = parseInt(dateString[1], 10);
+                    const month = parseInt(dateString[2], 10) - 1;
+                    const year = parseInt(dateString[3], 10
+    
+                    if (day >= 1 && day <= 31 && month >= 0 && month <= 11 && year >= 1900) {
+                        const postDate = new Date(year, month, day);
+        
+                        if (postDate > today) {
+                            article.style.display = 'none';
+                        }
+                    const postDate = new Date(year, month, day);
+
+                    if (postDate > today) {
+                        article.style.display = 'none';
+                    }
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

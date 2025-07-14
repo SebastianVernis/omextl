@@ -13,11 +13,9 @@ if (!$apiKey || trim($apiKey) === '') {
     exit;
 }
 
-// Ya no hay datos de prueba, ahora lee la entrada real desde la petición web.
 $data = json_decode(file_get_contents('php://input'), true);
 $chatHistory = $data['history'];
 
-// Si no hay historial, no se puede procesar.
 if (empty($chatHistory)) {
     http_response_code(400);
     echo json_encode(['error' => 'No se recibió historial de chat.']);
@@ -28,7 +26,6 @@ $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-fl
 
 $payload = [
     'contents' => $chatHistory,
-    // Puedes ajustar la configuración si lo deseas
     'generationConfig' => [
         'temperature' => 0.7,
         'topP' => 1,
