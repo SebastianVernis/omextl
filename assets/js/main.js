@@ -35,6 +35,7 @@ class ChatbotManager {
     }
 
     injectHTML() {
+
         if (document.getElementById('chat-bubble')) return;
 
         try {
@@ -66,6 +67,15 @@ class ChatbotManager {
             console.error('Error injecting chatbot HTML:', error);
             // Fallback or graceful degradation could be implemented here
         }
+        const chatbotHTML = `
+            <div class="chat-bubble" id="chat-bubble">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></path></svg>
+            </div>
+            <div class="chatbot-container" id="chatbot-container">
+                <iframe src="/chatbot.html" title="Asistente Virtual de OMEXTL" class="chatbot-frame" loading="lazy"></iframe>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', chatbotHTML);
     }
 
     init() {

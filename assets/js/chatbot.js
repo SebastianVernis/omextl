@@ -1,14 +1,17 @@
 class ChatbotManager {
-    constructor() {
-        this.chatWindow = document.getElementById('chat-window');
-        this.userInput = document.getElementById('user-input');
-        this.sendBtn = document.getElementById('send-btn');
-        this.closeBtn = document.getElementById('close-btn');
-        this.leadForm = document.getElementById('lead-form');
-        this.chatInputArea = document.getElementById('chat-input-area');
-        
-        this.init();
-    }
+constructor() {
+     this.chatWindow = document.getElementById('chat-window');
+     this.userInput = document.getElementById('user-input');
+     this.sendBtn = document.getElementById('send-btn');
+     this.closeBtn = document.getElementById('close-btn');
+     this.leadForm = document.getElementById('lead-form');
+     this.chatInputArea = document.getElementById('chat-input-area');
++    this.chatHistory = [];
++    this.leadData = {};
++    this.isLoading = false;
+     
+     this.init();
+ }
 
     async init() {
         this.setupEventListeners();
@@ -25,9 +28,7 @@ class ChatbotManager {
     }
 
     loadState() {
-        const savedState = sessionStorage.getItem('chatbotState');
-        if (savedState) {
-            const state = JSON.parse(savedState);
+        const savedState = sessionStorage.getItem('cha     const state = JSON.parse(savedState);
             this.chatHistory = state.chatHistory || [];
             this.leadData = state.leadData || {};
 
