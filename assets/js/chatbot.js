@@ -27,15 +27,21 @@ class ChatbotManager {
     loadState() {
         const savedState = sessionStorage.getItem('chatbotState');
         if (savedState) {
-            const state = JSON.parse(savedState);
-            this.chatHistory = state.chatHistory || [];
-            this.leadData = state.leadData || {};
+            try {
+                const state = JSON.parse(savedState);
+                this.chatHistory = state.chatHistory || [];
+                this.leadData = state.leadData || {};
 
-            if (state.isChatActive) {
-                this.leadForm.style.display = 'none';
-                this.chatWindow.style.display = 'flex';
-                this.chatInputArea.style.display = 'flex';
-                this.repopulateChat();
+                if (state.isChatActive) {
+                    this.leadForm.style.display = 'none';
+                    this.chatWindow.style.display = 'flex';
+                    this.chatInputArea.style.display = 'flex';
+                    this.repopulateChat();
+                }
+            } catch (error) {
+                console.warn('Failed to parse saved chatbot state:', error);
+                this.chatHistory = [];
+                this.leadData = {};
             }
         } else {
             this.chatHistory = [];
