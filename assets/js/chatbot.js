@@ -36,7 +36,7 @@ class ChatbotManager {
                 this.chatHistory = state.chatHistory || [];
                 this.leadData = state.leadData || {};
 
-                if (state.isChatActive) {
+                if (state.isChatActive && this.leadForm && this.chatWindow && this.chatInputArea) {
                     this.leadForm.style.display = 'none';
                     this.chatWindow.style.display = 'flex';
                     this.chatInputArea.style.display = 'flex';
