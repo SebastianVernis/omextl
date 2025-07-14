@@ -55,9 +55,9 @@ class ChatbotManager {
 
     repopulateChat() {
         this.chatHistory.forEach(item => {
-            if (item.role === 'user') {
+            if (item.role === 'user' && item.parts?.[0]?.text) {
                 this.appendMessage(item.parts[0].text, 'user');
-            } else if (item.role === 'model') {
+            } else if (item.role === 'model' && item.parts?.[0]?.text) {
                 this.appendMessage(item.parts[0].text, 'bot');
             }
         });
