@@ -101,9 +101,14 @@
                     const day = parseInt(dateString[1], 10);
                     const month = parseInt(dateString[2], 10) - 1;
                     const year = parseInt(dateString[3], 10);
-                    const postDate = new Date(year, month, day);
-
-                    if (postDate > today) {
+    
+                    if (day >= 1 && day <= 31 && month >= 0 && month <= 11 && year >= 1900) {
+                        const postDate = new Date(year, month, day);
+        
+                        if (postDate > today) {
+                            article.style.display = 'none';
+                        }
+                    } else {
                         article.style.display = 'none';
                     }
                 } else {
