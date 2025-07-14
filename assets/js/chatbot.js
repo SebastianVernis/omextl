@@ -4,9 +4,10 @@ class ChatbotManager {
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
         this.closeBtn = document.getElementById('close-btn');
+        this.leadForm = document.getElementById('lead-form');
+        this.chatInputArea = document.getElementById('chat-input-area');
         this.chatHistory = [];
         this.isLoading = false;
-        this.leadCollectionState = 'idle'; // idle, askingName, askingEmail, askingService, askingPhone, completed
         this.leadData = {};
         
         this.init();
@@ -14,8 +15,6 @@ class ChatbotManager {
 
     async init() {
         this.setupEventListeners();
-        await this.loadPrompt();
-        this.startLeadCollection();
     }
 
     setupEventListeners() {
@@ -33,6 +32,11 @@ class ChatbotManager {
         });
 
         this.userInput?.addEventListener('input', this.autoResize.bind(this));
+
+        this.leadForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleFormSubmission();
+        });
     }
 
     autoResize(event) {
@@ -41,13 +45,31 @@ class ChatbotManager {
         element.style.height = element.scrollHeight + 'px';
     }
 
+    async handleFormSubmission() {
+        const nameInput = document.getElementById('name-input');
+        const emailInput = document.getElementById('email-input');
+        const phoneInput = document.getElementById('phone-input');
+
+        this.leadData.name = nameInput.value.trim();
+        this.leadData.email = emailInput.value.trim();
+        this.leadData.phone = phoneInput.value.trim();
+
+        if (this.leadData.name && this.leadData.email && this.leadData.phone) {
+            this.leadForm.style.display = 'none';
+            this.chatWindow.style.display = 'flex';
+            this.chatInputArea.style.display = 'flex';
+            await this.startChat();
+        }
+    }
+
+    async startChat() {
+        await this.loadPrompt();
+        this.appendMessage('¡Hola! ¿Cómo puedo ayudarte hoy?', 'bot');
+    }
+
     async loadPrompt() {
         try {
-            const response = await fetch('./prompt.txt');
-            if (!response.ok) {
-                throw new Error(`Error al cargar el prompt: ${response.statusText}`);
-            }
-            const promptText = await response.text();
+            const promptText = `"1. Identidad y Personalidad: Eres OMEX-IA, el asistente virtual experto de OMEX TL, una empresa de logística y transporte en México. Tu personalidad es profesional, eficiente y confiable. Tu objetivo principal es ayudar a los visitantes del sitio web a entender los servicios de la empresa, facilitar el contacto y responder preguntas frecuentes. Directrices Fundamentales de Comunicación: Idioma: Te comunicas exclusivamente en español de México. Tono de Voz: Mantén siempre un tono servicial, claro y conciso. Eres un experto que inspira confianza. Eslogan Oficial: Tu lema principal es 'Tu carga segura, nuestro compromiso total.'Estrategia sobre Aliados: Nunca reveles los nombres de los socios o aliados logísticos. En su lugar, refiérete a ellos de forma general como 'nuestra red de aliados estratégicos de confianza' o 'nuestra robusta red logística'. OMEX TL es siempre el único proveedor y punto de contacto para el cliente. Base de Conocimiento (Knowledge Base) Información de la Empresa:Misión: Brindar soluciones logísticas confiables, seguras y adaptadas a las necesidades de cada cliente, impulsando operaciones ágiles y efectivas a través de procesos bien estructurados, tecnología de vanguardia y un equipo comprometido con la excelencia en el servicio. Visión: Consolidarnos como una empresa referente en logística a nivel nacional, reconocida por su capacidad de respuesta, su enfoque en la mejora continua y su firme compromiso con la calidad, la seguridad y la satisfacción total del cliente en cada etapa del proceso. Portafolio de Servicios: Transporte FTL (Full Truckload) y LTL (Less Than Truckload): Ofrecemos soluciones de carga completa y consolidada en caja seca. FTL garantiza exclusividad y rapidez, mientras que LTL permite compartir espacio para reducir costos. Transporte de Carga Refrigerada: Contamos con unidades con control de temperatura para garantizar la cadena de frío de productos perecederos y sensibles. Transporte en Camionetas: Disponemos de unidades dedicadas desde 1.5 hasta 3.5 toneladas, ideales para entregas directas, última milla y servicios flexibles. Custodia de Mercancías: Brindamos servicio a nivel nacional, con opciones de custodia armada o sencilla para proteger cargas de alto valor. Seguros de Mercancía: Gestionamos pólizas con cobertura amplia para unidades, así como para la carga y descarga, protegiendo su inversión. Maniobras Especializadas: Realizamos el servicio de carga y descarga, incluyendo el uso de maquinaria pesada. (Nota: Este servicio está sujeto a disponibilidad y requiere solicitud previa). Logística de Aduanas: Gestionamos el ingreso de mercancía en los principales puertos marítimos del país: Veracruz, Manzanillo y Lázaro Cárdenas. Monitoreo GPS 24/7: Todas nuestras unidades cuentan con seguimiento en tiempo real y funciones de seguridad avanzadas como paro de motor. Flotilla: Urvan / Van Mediana: 5 unidades. Uso: Paquetería de mayor volumen, rutas urbanas. Tornado Van: 1 unidad. Uso: Última milla, recolecciones, paquetería estándar. Attitude / Sedán: 1 unidad. Uso: Mensajería, paquetería pequeña, documentos. Lobo / Pickup: 1 unidad. Uso: Carga pesada, materiales voluminosos. Información de Contacto: Email: contacto@omextl.com Teléfono / WhatsApp: 56 3594 2337 Dirección: Av. Homero 229, Piso 1, Int. 104-A, Polanco V Secc, Miguel Hidalgo, CDMX, 11560. Sitio Web: www.omextl.com Redes Sociales: LinkedIn: https://www.linkedin.com/company/omex-tl/ YouTube: https://www.youtube.com/channel/UC3B2QJgrN48fNgPC4e0e_-Q Instagram: https://www.instagram.com/o.mextl/ Flujos de Conversación (Ejemplos de Comportamiento) Si el usuario quiere cotizar: Responde con entusiasmo: '¡Claro que sí! Con gusto te ayudo. Para darte la cotización más precisa, te invito a contactarnos directamente por correo a contacto@omextl.com o a través de nuestro WhatsApp 56 3594 2337, donde un especialista te atenderá de inmediato.' Si el usuario pide ayuda o tiene una queja: Responde con empatía: 'Entiendo. Lamento que estés experimentando un problema. Para darte la mejor atención, por favor contáctanos por teléfono o WhatsApp al 56 3594 2337 y un miembro de nuestro equipo te ayudará a resolverlo.' Si el usuario pregunta por un servicio específico: Proporciona la descripción del servicio basada en el portafolio de esta Gema de Marca. Finaliza siempre con una invitación a contactar para más detalles: 'Si te gustaría una cotización o más información, no dudes en escribirnos a contacto@omextl.com.'Al finalizar cualquier interacción exitosa: Agradece al usuario y cierra con el eslogan: 'Fue un placer ayudarte. En OMEX TL, tu carga segura es nuestro compromiso total. ¡Que tengas un excelente día!' Procuraras siempre ser breve sin omitir informacion, siempre utilizaras emojis para complementar de manera visual tus respuestas recuerda que tú formato es solo de texto, por lo que evitarás colocar hipervínculos o negritas, trabajaras sobre texto simple y emojis."`;
             this.chatHistory.push({
                 role: "user",
                 parts: [{ text: promptText }]
@@ -131,11 +153,6 @@ class ChatbotManager {
         }
     }
 
-    startLeadCollection() {
-        this.leadCollectionState = 'askingName';
-        this.appendMessage('Para comenzar, ¿podrías proporcionarme tu nombre completo?', 'bot');
-    }
-
     async handleUserInput() {
         const message = this.userInput.value.trim();
         if (!message || this.isLoading) return;
@@ -146,89 +163,19 @@ class ChatbotManager {
         this.appendMessage(message, 'user');
         this.userInput.value = '';
 
-        if (this.leadCollectionState !== 'completed') {
-            await this.handleLeadCollection(message);
-        } else {
-            this.showTypingIndicator();
-            try {
-                const botResponse = await this.getBotResponse(message);
-                this.removeTypingIndicator();
-                this.appendMessage(botResponse, 'bot');
-            } catch (error) {
-                this.removeTypingIndicator();
-                this.appendMessage('Error al procesar tu mensaje. Intenta de nuevo.', 'bot');
-            }
+        this.showTypingIndicator();
+        try {
+            const botResponse = await this.getBotResponse(message);
+            this.removeTypingIndicator();
+            this.appendMessage(botResponse, 'bot');
+        } catch (error) {
+            this.removeTypingIndicator();
+            this.appendMessage('Error al procesar tu mensaje. Intenta de nuevo.', 'bot');
         }
 
         this.isLoading = false;
         this.sendBtn.disabled = false;
         this.userInput.focus();
-    }
-
-    async handleLeadCollection(message) {
-        // A simple check to see if the user is asking a question instead of providing info.
-        if (message.includes('?') || message.toLowerCase().includes('que') || message.toLowerCase().includes('cual')) {
-            this.appendMessage('Entiendo que tienes una pregunta. Para poder ayudarte mejor, por favor, primero completemos tus datos.', 'bot');
-            // Re-ask the current question
-            this.reAskCurrentLeadQuestion();
-            return;
-        }
-
-        switch (this.leadCollectionState) {
-            case 'askingName':
-                this.leadData.name = message;
-                this.leadCollectionState = 'askingEmail';
-                this.appendMessage(`Gracias, ${this.leadData.name}. Ahora, ¿cuál es tu correo electrónico?`, 'bot');
-                break;
-            case 'askingEmail':
-                if (!this.isValidEmail(message)) {
-                    this.appendMessage('Por favor, introduce un correo electrónico válido.', 'bot');
-                    return;
-                }
-                this.leadData.email = message;
-                this.leadCollectionState = 'askingService';
-                this.appendMessage('Perfecto. ¿En qué servicio estás interesado?', 'bot');
-                break;
-            case 'askingService':
-                this.leadData.service = message;
-                this.leadCollectionState = 'askingPhone';
-                this.appendMessage('Gracias. Por último, ¿podrías darme tu número de teléfono?', 'bot');
-                break;
-            case 'askingPhone':
-                if (!this.isValidPhone(message)) {
-                    this.appendMessage('Por favor, introduce un número de teléfono válido (10 dígitos).', 'bot');
-                    return;
-                }
-                this.leadData.phone = message;
-                this.leadCollectionState = 'completed';
-                this.appendMessage('¡Excelente! He guardado tus datos. Ahora sí, ¿cómo puedo ayudarte?', 'bot');
-
-                // Optional: Send lead data to a server
-                // await this.sendLeadData();
-                break;
-        }
-    }
-
-    reAskCurrentLeadQuestion() {
-        switch (this.leadCollectionState) {
-            case 'askingName':
-                this.appendMessage('¿Cuál es tu nombre completo?', 'bot');
-                break;
-            case 'askingEmail':
-                this.appendMessage('¿Me podrías proporcionar tu correo electrónico?', 'bot');
-                break;
-            case 'askingService':
-                this.appendMessage('¿En qué servicio de OMEXTL estás interesado?', 'bot');
-                break;
-            case 'askingPhone':
-                this.appendMessage('Para continuar, por favor, facilítame tu número de teléfono.', 'bot');
-                break;
-        }
-    }
-
-    isValidEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
     }
 }
 
