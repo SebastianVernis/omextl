@@ -35,8 +35,13 @@ class ChatbotManager {
         if (savedState) {
             try {
                 const state = JSON.parse(savedState);
-                this.chatHistory = state.chatHistory || [];
-                this.leadData = state.leadData || {};
+                if (state && typeof state === 'object') {
+                    this.chatHistory = Array.isArray(state.chatHistory) ? state.chatHistory : [];
+                    this.leadData = (state.leadData && typeof state.leadData === 'object') ? state.leadData : {};
+                } else {
+                    this.chatHistory = [];
+                    this.leadData = {};
+                }
 
                 if (state.isChatActive && this.leadForm && this.chatWindow && this.chatInputArea) {
                     this.leadForm.style.display = 'none';
