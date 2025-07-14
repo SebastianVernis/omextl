@@ -28,45 +28,12 @@ const Utils = {
 
 class ChatbotManager {
     constructor() {
-        this.injectHTML();
-        this.bubble = Utils.$('#chat-bubble');
-        this.container = Utils.$('#chatbot-container');
         this.init();
     }
 
-    injectHTML() {
-
+    async injectHTML() {
         if (document.getElementById('chat-bubble')) return;
 
-        try {
-            const fragment = document.createDocumentFragment();
-            const container = document.createElement('div');
-            container.innerHTML = `
-                <div class="chat-bubble" id="chat-bubble" role="button" aria-label="Abrir chat de asistencia" tabindex="0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-                    </svg>
-                </div>
-                <div class="chatbot-container" id="chatbot-container">
-                    <iframe
-                        src="/chatbot.html"
-                        title="Asistente Virtual de OMEXTL"
-                        class="chatbot-frame"
-                        loading="lazy"
-                        sandbox="allow-scripts allow-same-origin"
-                    ></iframe>
-                </div>
-            `;
-
-            while (container.firstChild) {
-                fragment.appendChild(container.firstChild);
-            }
-
-            document.body.appendChild(fragment);
-        } catch (error) {
-            console.error('Error injecting chatbot HTML:', error);
-            // Fallback or graceful degradation could be implemented here
-        }
         const chatbotHTML = `
             <div class="chat-bubble" id="chat-bubble">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></path></svg>
@@ -78,7 +45,11 @@ class ChatbotManager {
         document.body.insertAdjacentHTML('beforeend', chatbotHTML);
     }
 
-    init() {
+    async init() {
+        await this.injectHTML();
+        this.bubble = Utils.$('#chat-bubble');
+        this.container = Utils.$('#chatbot-container');
+
         if (this.bubble) {
             this.bubble.addEventListener('click', () => this.toggle());
         }
@@ -270,6 +241,8 @@ class App {
 
         this.navigation.setActiveLinks();
         FooterManager.updateYear();
+
+        await this.chatbot.init();
 
         requestAnimationFrame(() => {
             this.scrollAnimation = new ScrollAnimationManager();
