@@ -6,15 +6,51 @@ class ChatbotManager {
         this.closeBtn = document.getElementById('close-btn');
         this.leadForm = document.getElementById('lead-form');
         this.chatInputArea = document.getElementById('chat-input-area');
-        this.chatHistory = [];
-        this.isLoading = false;
-        this.leadData = {};
         
         this.init();
     }
 
     async init() {
         this.setupEventListeners();
+        this.loadState();
+    }
+
+    saveState() {
+        const state = {
+            chatHistory: this.chatHistory,
+            leadData: this.leadData,
+            isChatActive: this.leadForm.style.display === 'none'
+        };
+        sessionStorage.setItem('chatbotState', JSON.stringify(state));
+    }
+
+    loadState() {
+        const savedState = sessionStorage.getItem('chatbotState');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            this.chatHistory = state.chatHistory || [];
+            this.leadData = state.leadData || {};
+
+            if (state.isChatActive) {
+                this.leadForm.style.display = 'none';
+                this.chatWindow.style.display = 'flex';
+                this.chatInputArea.style.display = 'flex';
+                this.repopulateChat();
+            }
+        } else {
+            this.chatHistory = [];
+            this.leadData = {};
+        }
+    }
+
+    repopulateChat() {
+        this.chatHistory.forEach(item => {
+            if (item.role === 'user') {
+                this.appendMessage(item.parts[0].text, 'user');
+            } else if (item.role === 'model') {
+                this.appendMessage(item.parts[0].text, 'bot');
+            }
+        });
     }
 
     setupEventListeners() {
@@ -59,6 +95,7 @@ class ChatbotManager {
             this.chatWindow.style.display = 'flex';
             this.chatInputArea.style.display = 'flex';
             await this.startChat();
+            this.saveState();
         }
     }
 
@@ -176,6 +213,7 @@ class ChatbotManager {
         this.isLoading = false;
         this.sendBtn.disabled = false;
         this.userInput.focus();
+        this.saveState();
     }
 }
 
