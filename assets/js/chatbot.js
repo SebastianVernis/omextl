@@ -1,12 +1,5 @@
 class ChatbotManager {
     constructor() {
-        this.chatWindow = document.getElementById('chat-window');
-        this.userInput = document.getElementById('user-input');
-        this.sendBtn = document.getElementById('send-btn');
-        this.closeBtn = document.getElementById('close-btn');
-        this.leadForm = document.getElementById('lead-form');
-        this.chatInputArea = document.getElementById('chat-input-area');
-
         this.init();
     }
 
