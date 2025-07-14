@@ -4,9 +4,10 @@ class ChatbotManager {
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
         this.closeBtn = document.getElementById('close-btn');
+        this.leadForm = document.getElementById('lead-form');
+        this.chatInputArea = document.getElementById('chat-input-area');
         this.chatHistory = [];
         this.isLoading = false;
-        this.leadCollectionState = 'idle'; // idle, askingName, askingEmail, askingService, askingPhone, completed
         this.leadData = {};
         
         this.init();
@@ -14,8 +15,6 @@ class ChatbotManager {
 
     async init() {
         this.setupEventListeners();
-        await this.loadPrompt();
-        this.startLeadCollection();
     }
 
     setupEventListeners() {
@@ -33,6 +32,11 @@ class ChatbotManager {
         });
 
         this.userInput?.addEventListener('input', this.autoResize.bind(this));
+
+        this.leadForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleFormSubmission();
+        });
     }
 
     autoResize(event) {
@@ -41,13 +45,32 @@ class ChatbotManager {
         element.style.height = element.scrollHeight + 'px';
     }
 
+    async handleFormSubmission() {
+        const nameInput = document.getElementById('name-input');
+        const emailInput = document.getElementById('email-input');
+        const phoneInput = document.getElementById('phone-input');
+
+        this.leadData.name = nameInput.value.trim();
+        this.leadData.email = emailInput.value.trim();
+        this.leadData.phone = phoneInput.value.trim();
+
+        if (this.leadData.name && this.leadData.email && this.leadData.phone) {
+            this.leadForm.style.display = 'none';
+            this.chatWindow.style.display = 'flex';
+            this.chatInputArea.style.display = 'flex';
+            await this.startChat();
+        }
+    }
+
+    async startChat() {
+        await this.loadPrompt();
+        this.appendMessage('¡Hola! ¿Cómo puedo ayudarte hoy?', 'bot');
+    }
+
     async loadPrompt() {
         try {
-            const response = await fetch('./prompt.txt');
-            if (!response.ok) {
-                throw new Error(`Error al cargar el prompt: ${response.statusText}`);
-            }
-            const promptText = await response.text();
+            // The prompt is now hardcoded, so we don't need to fetch it from a file.
+            const promptText = `Eres OMEX-IA, el asistente virtual de OMEX TL. Tu objetivo es ayudar a los usuarios con sus consultas sobre logística y transporte. Los datos del usuario son: Nombre: ${this.leadData.name}, Correo electrónico: ${this.leadData.email}, Número de teléfono: ${this.leadData.phone}.`;
             this.chatHistory.push({
                 role: "user",
                 parts: [{ text: promptText }]
@@ -131,11 +154,6 @@ class ChatbotManager {
         }
     }
 
-    startLeadCollection() {
-        this.leadCollectionState = 'askingName';
-        this.appendMessage('Para comenzar, ¿podrías proporcionarme tu nombre completo?', 'bot');
-    }
-
     async handleUserInput() {
         const message = this.userInput.value.trim();
         if (!message || this.isLoading) return;
@@ -146,89 +164,19 @@ class ChatbotManager {
         this.appendMessage(message, 'user');
         this.userInput.value = '';
 
-        if (this.leadCollectionState !== 'completed') {
-            await this.handleLeadCollection(message);
-        } else {
-            this.showTypingIndicator();
-            try {
-                const botResponse = await this.getBotResponse(message);
-                this.removeTypingIndicator();
-                this.appendMessage(botResponse, 'bot');
-            } catch (error) {
-                this.removeTypingIndicator();
-                this.appendMessage('Error al procesar tu mensaje. Intenta de nuevo.', 'bot');
-            }
+        this.showTypingIndicator();
+        try {
+            const botResponse = await this.getBotResponse(message);
+            this.removeTypingIndicator();
+            this.appendMessage(botResponse, 'bot');
+        } catch (error) {
+            this.removeTypingIndicator();
+            this.appendMessage('Error al procesar tu mensaje. Intenta de nuevo.', 'bot');
         }
 
         this.isLoading = false;
         this.sendBtn.disabled = false;
         this.userInput.focus();
-    }
-
-    async handleLeadCollection(message) {
-        // A simple check to see if the user is asking a question instead of providing info.
-        if (message.includes('?') || message.toLowerCase().includes('que') || message.toLowerCase().includes('cual')) {
-            this.appendMessage('Entiendo que tienes una pregunta. Para poder ayudarte mejor, por favor, primero completemos tus datos.', 'bot');
-            // Re-ask the current question
-            this.reAskCurrentLeadQuestion();
-            return;
-        }
-
-        switch (this.leadCollectionState) {
-            case 'askingName':
-                this.leadData.name = message;
-                this.leadCollectionState = 'askingEmail';
-                this.appendMessage(`Gracias, ${this.leadData.name}. Ahora, ¿cuál es tu correo electrónico?`, 'bot');
-                break;
-            case 'askingEmail':
-                if (!this.isValidEmail(message)) {
-                    this.appendMessage('Por favor, introduce un correo electrónico válido.', 'bot');
-                    return;
-                }
-                this.leadData.email = message;
-                this.leadCollectionState = 'askingService';
-                this.appendMessage('Perfecto. ¿En qué servicio estás interesado?', 'bot');
-                break;
-            case 'askingService':
-                this.leadData.service = message;
-                this.leadCollectionState = 'askingPhone';
-                this.appendMessage('Gracias. Por último, ¿podrías darme tu número de teléfono?', 'bot');
-                break;
-            case 'askingPhone':
-                if (!this.isValidPhone(message)) {
-                    this.appendMessage('Por favor, introduce un número de teléfono válido (10 dígitos).', 'bot');
-                    return;
-                }
-                this.leadData.phone = message;
-                this.leadCollectionState = 'completed';
-                this.appendMessage('¡Excelente! He guardado tus datos. Ahora sí, ¿cómo puedo ayudarte?', 'bot');
-
-                // Optional: Send lead data to a server
-                // await this.sendLeadData();
-                break;
-        }
-    }
-
-    reAskCurrentLeadQuestion() {
-        switch (this.leadCollectionState) {
-            case 'askingName':
-                this.appendMessage('¿Cuál es tu nombre completo?', 'bot');
-                break;
-            case 'askingEmail':
-                this.appendMessage('¿Me podrías proporcionar tu correo electrónico?', 'bot');
-                break;
-            case 'askingService':
-                this.appendMessage('¿En qué servicio de OMEXTL estás interesado?', 'bot');
-                break;
-            case 'askingPhone':
-                this.appendMessage('Para continuar, por favor, facilítame tu número de teléfono.', 'bot');
-                break;
-        }
-    }
-
-    isValidEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
     }
 }
 

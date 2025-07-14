@@ -50,7 +50,7 @@
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
-            display: flex;
+            display: none; /* Hidden by default */
             flex-direction: column;
             gap: 15px;
             background-color: #f9f9f9;
@@ -101,7 +101,7 @@
         }
 
         .chat-input {
-            display: flex;
+            display: none; /* Hidden by default */
             padding: 12px;
             border-top: 1px solid #e0e0e0;
             background-color: #fff;
@@ -140,6 +140,30 @@
             background-color: #a0a0a0;
             cursor: not-allowed;
         }
+
+        #lead-form {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #lead-form input {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 12px 18px;
+            font-size: 16px;
+        }
+
+        #lead-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 18px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +172,13 @@
         <span>Asistente OMEXTL</span>
         <button id="close-btn">&times;</button>
     </div>
+
+    <form id="lead-form">
+        <input type="text" id="name-input" placeholder="Nombre" required>
+        <input type="email" id="email-input" placeholder="Correo electrónico" required>
+        <input type="tel" id="phone-input" placeholder="Número telefónico" required>
+        <button type="submit">Iniciar Chat</button>
+    </form>
 
     <div class="chat-window" id="chat-window">
         <!-- Messages will be appended here -->
