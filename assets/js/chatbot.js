@@ -21,7 +21,11 @@ class ChatbotManager {
             leadData: this.leadData,
             isChatActive: this.leadForm.style.display === 'none'
         };
-        sessionStorage.setItem('chatbotState', JSON.stringify(state));
+        try {
+            sessionStorage.setItem('chatbotState', JSON.stringify(state));
+        } catch (error) {
+            console.warn('Failed to save chatbot state:', error);
+        }
     }
 
     loadState() {
