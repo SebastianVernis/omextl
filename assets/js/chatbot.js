@@ -1,4 +1,15 @@
 class ChatbotManager {
+    constructor() {
+        this.chatWindow = document.getElementById('chat-window');
+        this.userInput = document.getElementById('user-input');
+        this.sendBtn = document.getElementById('send-btn');
+        this.closeBtn = document.getElementById('close-btn');
+        this.leadForm = document.getElementById('lead-form');
+        this.chatInputArea = document.getElementById('chat-input-area');
+        
+        this.init();
+    }
+
 constructor() {
      this.chatWindow = document.getElementById('chat-window');
      this.userInput = document.getElementById('user-input');
@@ -13,6 +24,7 @@ constructor() {
      this.init();
  }
 
+
     async init() {
         this.setupEventListeners();
         this.loadState();
@@ -24,6 +36,40 @@ constructor() {
             leadData: this.leadData,
             isChatActive: this.leadForm.style.display === 'none'
         };
+
+        try {
+            if (typeof(Storage) !== "undefined" && sessionStorage) {
+                sessionStorage.setItem('chatbotState', JSON.stringify(state));
+            }
+        } catch (error) {
+            console.warn('Failed to save chatbot state:', error);
+        }
+    }
+
+    loadState() {
+        const savedState = sessionStorage.getItem('chatbotState');
+        if (savedState) {
+            try {
+                const state = JSON.parse(savedState);
+                if (state && typeof state === 'object') {
+                    this.chatHistory = Array.isArray(state.chatHistory) ? state.chatHistory : [];
+                    this.leadData = (state.leadData && typeof state.leadData === 'object') ? state.leadData : {};
+                } else {
+                    this.chatHistory = [];
+                    this.leadData = {};
+                }
+
+                if (state.isChatActive && this.leadForm && this.chatWindow && this.chatInputArea) {
+                    this.leadForm.style.display = 'none';
+                    this.chatWindow.style.display = 'flex';
+                    this.chatInputArea.style.display = 'flex';
+                    this.repopulateChat();
+                }
+            } catch (error) {
+                console.warn('Failed to parse saved chatbot state:', error);
+                this.chatHistory = [];
+                this.leadData = {};
+              
         sessionStorage.setItem('chatbotState', JSON.stringify(state));
     }
 
@@ -37,6 +83,7 @@ constructor() {
                 this.chatWindow.style.display = 'flex';
                 this.chatInputArea.style.display = 'flex';
                 this.repopulateChat();
+
             }
         } else {
             this.chatHistory = [];
@@ -46,9 +93,15 @@ constructor() {
 
     repopulateChat() {
         this.chatHistory.forEach(item => {
+
+            if (item.role === 'user' && item.parts?.[0]?.text) {
+                this.appendMessage(item.parts[0].text, 'user');
+            } else if (item.role === 'model' && item.parts?.[0]?.text) {
+
             if (item.role === 'user') {
                 this.appendMessage(item.parts[0].text, 'user');
             } else if (item.role === 'model') {
+
                 this.appendMessage(item.parts[0].text, 'bot');
             }
         });
